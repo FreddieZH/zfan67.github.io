@@ -1,0 +1,169 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  
+  <title>数据结构学习笔记(二)--算法 | 永远站在鸡蛋一边</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  
+    <meta name="author" content="Zfan">
+  
+  
+    <meta name="description" content="基本算法分类穷举法
+回溯,搜索
+递归分治
+贪心法
+动态规划
+大O表示法的运算规则加法规则: f1(n) + f2(n) = O(max(f1(n), f2(n)))
+乘法规则: f1(n) * f2(n) = O(f1(n) * f2(n))
+大Ω表示法大O表示法和大Ω表示法唯一区别在于不等式的方向;
+采用大Ω表示法时,最好找出函数增值率所有下限中最大的下限;
+大Θ表示法当上、下限相同时可以用大Θ">
+  
+  <meta name="description" content="基本算法分类穷举法
+回溯,搜索
+递归分治
+贪心法
+动态规划
+大O表示法的运算规则加法规则: f1(n) + f2(n) = O(max(f1(n), f2(n)))
+乘法规则: f1(n) * f2(n) = O(f1(n) * f2(n))
+大Ω表示法大O表示法和大Ω表示法唯一区别在于不等式的方向;
+采用大Ω表示法时,最好找出函数增值率所有下限中最大的下限;
+大Θ表示法当上、下限相同时可以用大Θ">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构学习笔记(二)--算法">
+<meta property="og:url" content="http://zvan.xyz/2016/01/06/数据结构学习笔记(二)/index.html">
+<meta property="og:site_name" content="永远站在鸡蛋一边">
+<meta property="og:description" content="基本算法分类穷举法
+回溯,搜索
+递归分治
+贪心法
+动态规划
+大O表示法的运算规则加法规则: f1(n) + f2(n) = O(max(f1(n), f2(n)))
+乘法规则: f1(n) * f2(n) = O(f1(n) * f2(n))
+大Ω表示法大O表示法和大Ω表示法唯一区别在于不等式的方向;
+采用大Ω表示法时,最好找出函数增值率所有下限中最大的下限;
+大Θ表示法当上、下限相同时可以用大Θ">
+<meta property="og:updated_time" content="2016-01-06T05:20:50.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据结构学习笔记(二)--算法">
+<meta name="twitter:description" content="基本算法分类穷举法
+回溯,搜索
+递归分治
+贪心法
+动态规划
+大O表示法的运算规则加法规则: f1(n) + f2(n) = O(max(f1(n), f2(n)))
+乘法规则: f1(n) * f2(n) = O(f1(n) * f2(n))
+大Ω表示法大O表示法和大Ω表示法唯一区别在于不等式的方向;
+采用大Ω表示法时,最好找出函数增值率所有下限中最大的下限;
+大Θ表示法当上、下限相同时可以用大Θ">
+  
+  
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+
+<body>
+  <div class="wrapper">
+    <header id="header">
+  <div class="title">
+    <h1><a href="/">永远站在鸡蛋一边</a></h1>
+    <p><a href="/">--Zfan的记事簿--</a></p>
+  </div>
+  <nav class="nav">
+    <ul>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/archives">archives</a></li>
+      
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+  <div class="clearfix"></div>
+</header>
+    <div class="content"><article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2016/01/06/数据结构学习笔记(二)/">
+  <time datetime="2016-01-06T05:20:50.000Z">
+    2016-01-06
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title">数据结构学习笔记(二)--算法</h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <h3 id="基本算法分类">基本算法分类</h3><pre><code>穷举法
+回溯,搜索
+递归分治
+贪心法
+动态规划
+</code></pre><h3 id="大O表示法的运算规则">大O表示法的运算规则</h3><pre><code>加法规则: f1(n) + f2(n) = O(max(f1(n), f2(n)))
+乘法规则: f1(n) * f2(n) = O(f1(n) * f2(n))
+</code></pre><h3 id="大Ω表示法">大Ω表示法</h3><p>大O表示法和大Ω表示法唯一区别在于不等式的方向;</p>
+<p>采用大Ω表示法时,最好找出函数增值率所有下限中最大的下限;</p>
+<h3 id="大Θ表示法">大Θ表示法</h3><p>当上、下限相同时可以用大Θ表示法;</p>
+
+    
+  </div>
+  <footer>
+    
+      
+  <div class="categories">
+    <a class="categories-link" href="/categories/数据结构/">数据结构</a>
+  </div>
+
+      
+  <div class="tags">
+    <a class="tags-link" href="/tags/数据结构/">数据结构</a>, <a class="tags-link" href="/tags/算法/">算法</a>
+  </div>
+
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+</div>
+  </div>
+  <footer id="footer"><div class="copyright">
+  
+  &copy; 2016 <a href="/">Zfan</a>
+  
+</div>
+<div class="theme-copyright">
+  Theme by <a href="https://github.com/orderedlist" target="_blank">orderedlist</a>
+   | 
+  Redesign by <a href="http://heroicyang.com/" target="_blank">Heroic Yang</a>
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+<script src="/js/scale.fix.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+  (function($){
+    $('.fancybox').fancybox();
+  })(jQuery);
+</script>
+
+</body>
+</html>

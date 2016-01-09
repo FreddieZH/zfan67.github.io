@@ -1,0 +1,143 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  
+  <title>内存管理学习笔记 | 永远站在鸡蛋一边</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  
+    <meta name="author" content="Zfan">
+  
+  
+    <meta name="description" content="1.内存管理的必要性C语言中需要通过malloc()和free()函数对内存进行管理；
+如果程序未释放不再使用的内存，则会发生内存泄露；
+指向已经被释放的对象的指针，叫做悬垂指针或野指针；如果访问了已经被释放的内存，则会发生数据错误；
+Objective-C会向类对象发送alloc消息来生成实例对象，alloc的作用就是分配内存；alloc返回的对象是id类型，id实质上就是指针类型，其指向的就是">
+  
+  <meta name="description" content="1.内存管理的必要性C语言中需要通过malloc()和free()函数对内存进行管理；
+如果程序未释放不再使用的内存，则会发生内存泄露；
+指向已经被释放的对象的指针，叫做悬垂指针或野指针；如果访问了已经被释放的内存，则会发生数据错误；
+Objective-C会向类对象发送alloc消息来生成实例对象，alloc的作用就是分配内存；alloc返回的对象是id类型，id实质上就是指针类型，其指向的就是">
+<meta property="og:type" content="article">
+<meta property="og:title" content="内存管理学习笔记">
+<meta property="og:url" content="http://zvan.xyz/2016/01/06/内存管理学习笔记/index.html">
+<meta property="og:site_name" content="永远站在鸡蛋一边">
+<meta property="og:description" content="1.内存管理的必要性C语言中需要通过malloc()和free()函数对内存进行管理；
+如果程序未释放不再使用的内存，则会发生内存泄露；
+指向已经被释放的对象的指针，叫做悬垂指针或野指针；如果访问了已经被释放的内存，则会发生数据错误；
+Objective-C会向类对象发送alloc消息来生成实例对象，alloc的作用就是分配内存；alloc返回的对象是id类型，id实质上就是指针类型，其指向的就是">
+<meta property="og:updated_time" content="2016-01-06T05:20:18.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="内存管理学习笔记">
+<meta name="twitter:description" content="1.内存管理的必要性C语言中需要通过malloc()和free()函数对内存进行管理；
+如果程序未释放不再使用的内存，则会发生内存泄露；
+指向已经被释放的对象的指针，叫做悬垂指针或野指针；如果访问了已经被释放的内存，则会发生数据错误；
+Objective-C会向类对象发送alloc消息来生成实例对象，alloc的作用就是分配内存；alloc返回的对象是id类型，id实质上就是指针类型，其指向的就是">
+  
+  
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+
+<body>
+  <div class="wrapper">
+    <header id="header">
+  <div class="title">
+    <h1><a href="/">永远站在鸡蛋一边</a></h1>
+    <p><a href="/">--Zfan的记事簿--</a></p>
+  </div>
+  <nav class="nav">
+    <ul>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/archives">archives</a></li>
+      
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+  <div class="clearfix"></div>
+</header>
+    <div class="content"><article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2016/01/06/内存管理学习笔记/">
+  <time datetime="2016-01-06T05:20:18.000Z">
+    2016-01-06
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title">内存管理学习笔记</h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <h3 id="1-内存管理的必要性">1.内存管理的必要性</h3><p>C语言中需要通过malloc()和free()函数对内存进行管理；</p>
+<p>如果程序未释放不再使用的内存，则会发生内存泄露；</p>
+<p>指向已经被释放的对象的指针，叫做悬垂指针或野指针；如果访问了已经被释放的内存，则会发生数据错误；</p>
+<p>Objective-C会向类对象发送alloc消息来生成实例对象，alloc的作用就是分配内存；alloc返回的对象是id类型，id实质上就是指针类型，其指向的就是为实例对象分配的内存；</p>
+<h3 id="2-引用计数">2.引用计数</h3><p>Objective-C使用了一种动态的内存管理方式，称为引用计数；每个对象都有一个与之相关的整数，称作它的引用计数；系统会动态跟踪对象被引用的次数，当该对象被retain时就将其引用计数加1，当该对象被release时其引用计数减1，当对象的引用次数为0时，系统会释放这个对象并回收其占用的内存；</p>
+<p>自动引用计数(ARC)会在程序编译期间自动加入合适的内存管理方法；</p>
+<p>释放内存的方法是dealloc方法，这是一个实例方法，当对象的引用计数为0时，系统会调用该对象的dealloc方法释放其内存，通常不允许在程序中直接调用该方法；</p>
+<p>retain是”保持”的意思，对一个对象发送retain消息，就意味着拥有这个对象的所有权；给对象发送release消息意味放弃该对象的所有权；</p>
+
+    
+  </div>
+  <footer>
+    
+      
+  <div class="categories">
+    <a class="categories-link" href="/categories/iOS开发/">iOS开发</a>
+  </div>
+
+      
+  <div class="tags">
+    <a class="tags-link" href="/tags/iOS/">iOS</a>, <a class="tags-link" href="/tags/内存/">内存</a>
+  </div>
+
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+</div>
+  </div>
+  <footer id="footer"><div class="copyright">
+  
+  &copy; 2016 <a href="/">Zfan</a>
+  
+</div>
+<div class="theme-copyright">
+  Theme by <a href="https://github.com/orderedlist" target="_blank">orderedlist</a>
+   | 
+  Redesign by <a href="http://heroicyang.com/" target="_blank">Heroic Yang</a>
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+<script src="/js/scale.fix.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+  (function($){
+    $('.fancybox').fancybox();
+  })(jQuery);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  
+  <title>为什么Objective-C不能在栈上创建对象 | 永远站在鸡蛋一边</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  
+    <meta name="author" content="Zfan">
+  
+  
+    <meta name="description" content="本文参考：http://blog.csdn.net/cocoarannie/article/details/9956281
+为了搞清楚这个问题，首先需要了解一些预备知识：  
+一个由C/C++编译的程序所占用的内存主要分为以下几个部分：1.栈区(stack)–由编译器自动分配释放，主要存放函数的参数，局部变量的值等；操作方式类似于数据结构的栈；2.堆区(heap)–一般由程序员分配释放，程序结束后">
+  
+  <meta name="description" content="本文参考：http://blog.csdn.net/cocoarannie/article/details/9956281
+为了搞清楚这个问题，首先需要了解一些预备知识：  
+一个由C/C++编译的程序所占用的内存主要分为以下几个部分：1.栈区(stack)–由编译器自动分配释放，主要存放函数的参数，局部变量的值等；操作方式类似于数据结构的栈；2.堆区(heap)–一般由程序员分配释放，程序结束后">
+<meta property="og:type" content="article">
+<meta property="og:title" content="为什么Objective-C不能在栈上创建对象">
+<meta property="og:url" content="http://zvan.xyz/2016/01/06/为什么Objective-C不能在栈上创建对象/index.html">
+<meta property="og:site_name" content="永远站在鸡蛋一边">
+<meta property="og:description" content="本文参考：http://blog.csdn.net/cocoarannie/article/details/9956281
+为了搞清楚这个问题，首先需要了解一些预备知识：  
+一个由C/C++编译的程序所占用的内存主要分为以下几个部分：1.栈区(stack)–由编译器自动分配释放，主要存放函数的参数，局部变量的值等；操作方式类似于数据结构的栈；2.堆区(heap)–一般由程序员分配释放，程序结束后">
+<meta property="og:updated_time" content="2016-01-06T02:29:32.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="为什么Objective-C不能在栈上创建对象">
+<meta name="twitter:description" content="本文参考：http://blog.csdn.net/cocoarannie/article/details/9956281
+为了搞清楚这个问题，首先需要了解一些预备知识：  
+一个由C/C++编译的程序所占用的内存主要分为以下几个部分：1.栈区(stack)–由编译器自动分配释放，主要存放函数的参数，局部变量的值等；操作方式类似于数据结构的栈；2.堆区(heap)–一般由程序员分配释放，程序结束后">
+  
+  
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+
+<body>
+  <div class="wrapper">
+    <header id="header">
+  <div class="title">
+    <h1><a href="/">永远站在鸡蛋一边</a></h1>
+    <p><a href="/">--Zfan的记事簿--</a></p>
+  </div>
+  <nav class="nav">
+    <ul>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/archives">archives</a></li>
+      
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+  <div class="clearfix"></div>
+</header>
+    <div class="content"><article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2016/01/06/为什么Objective-C不能在栈上创建对象/">
+  <time datetime="2016-01-06T02:29:32.000Z">
+    2016-01-06
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title">为什么Objective-C不能在栈上创建对象</h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <p>本文参考：<a href="http://blog.csdn.net/cocoarannie/article/details/9956281" target="_blank" rel="external">http://blog.csdn.net/cocoarannie/article/details/9956281</a></p>
+<p>为了搞清楚这个问题，首先需要了解一些预备知识：  </p>
+<p>一个由C/C++编译的程序所占用的内存主要分为以下几个部分：<br>1.栈区(stack)–由编译器自动分配释放，主要存放函数的参数，局部变量的值等；操作方式类似于数据结构的栈；<br>2.堆区(heap)–一般由程序员分配释放，程序结束后会被系统统一回收；需要注意它与数据结构中的堆有区别，分配方式类似于链表；<br>3.全局区(静态区域 static)–全局变量和静态变量的存储是放在一起的，初始化的全局变量和静态变量在一块区域，未初始化的全局变量和未初始化的静态变量在另一块区域，程序结束后由系统统一释放；<br>4.文字常量区–常量字符串就存放在这里；程序结束后由系统统一释放；<br>5.程序代码区–存放函数体的二进制代码；</p>
+
+    
+  </div>
+  <footer>
+    
+      
+  <div class="categories">
+    <a class="categories-link" href="/categories/iOS开发/">iOS开发</a>
+  </div>
+
+      
+  <div class="tags">
+    <a class="tags-link" href="/tags/iOS/">iOS</a>, <a class="tags-link" href="/tags/栈与堆/">栈与堆</a>
+  </div>
+
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+</div>
+  </div>
+  <footer id="footer"><div class="copyright">
+  
+  &copy; 2016 <a href="/">Zfan</a>
+  
+</div>
+<div class="theme-copyright">
+  Theme by <a href="https://github.com/orderedlist" target="_blank">orderedlist</a>
+   | 
+  Redesign by <a href="http://heroicyang.com/" target="_blank">Heroic Yang</a>
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+<script src="/js/scale.fix.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+  (function($){
+    $('.fancybox').fancybox();
+  })(jQuery);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  
+  <title>永远站在鸡蛋一边</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  
+    <meta name="author" content="Zfan">
+  
+  
+  <meta name="description" content="见自己，见天地，见众生">
+<meta property="og:type" content="website">
+<meta property="og:title" content="永远站在鸡蛋一边">
+<meta property="og:url" content="http://zvan.xyz/page/2/index.html">
+<meta property="og:site_name" content="永远站在鸡蛋一边">
+<meta property="og:description" content="见自己，见天地，见众生">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="永远站在鸡蛋一边">
+<meta name="twitter:description" content="见自己，见天地，见众生">
+  
+  
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+
+<body>
+  <div class="wrapper">
+    <header id="header">
+  <div class="title">
+    <h1><a href="/">永远站在鸡蛋一边</a></h1>
+    <p><a href="/">--Zfan的记事簿--</a></p>
+  </div>
+  <nav class="nav">
+    <ul>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/archives">archives</a></li>
+      
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+  <div class="clearfix"></div>
+</header>
+    <div class="content">
+
+
+
+
+  
+    <article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2015/10/28/解决在iOS8环境下,当用户关闭定位服务总开关时,无法将APP定位子选项加入定位权限列表的问题/">
+  <time datetime="2015-10-27T16:08:39.000Z">
+    2015-10-28
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title"><a href="/2015/10/28/解决在iOS8环境下,当用户关闭定位服务总开关时,无法将APP定位子选项加入定位权限列表的问题/">解决在iOS8环境下,当用户关闭定位服务总开关时,无法将APP定位子选项加入定位权限列表的问题</a></h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <pre><code>关键点：
+<span class="pp">- <span class="params">(void)</span>locationManager:<span class="params">(<span class="variable">CLLocationManager</span> *)</span>manager didChangeAuthorizationStatus:<span class="params">(<span class="variable">CLAuthorizationStatus</span>)</span>status代理方法</span>
+</code></pre><p>iOS7环境下当APP首次调用startUpdatingLocation方法开启定位服务时，系统会自动将该APP的定位子选项加入设置中的定位权限列表，并弹框提示用户是否为该APP定位服务授权。</p>
+<p>可是在iOS8环境下，使用定位服务的方式较之前版本发生改变，调用startUpdatingLocation方法前需要调用requestWhenInUseAuthorization方法来请求定位权限； 但是在用户关闭定位服务总开关时，单单使用该方法却无法将APP定位的子选项加入定位权限列表，用户在打开定位总开关后是找不到该APP的子选项的，除非在定位服务总开关打开的情况下才能正常加入权限列表；</p>
+<p>解决方法是将开启定位的startUpdatingLocation方法放在didChangeAuthorizationStatus:代理方法中调用：<br>1）首先调用requestWhenInUseAuthorization方法请求定位权限（iOS7及以前无需调用此方法）;<br>2）然后在didChangeAuthorizationStatus:代理方法中调用startUpdatingLocation方法请求一次定位；<br>采用这种方式解决，无论定位服务的总开关是否打开，都能将APP的定位子选项加入定位权限列表。</p>
+
+    
+  </div>
+  <footer class="end-sep">
+    
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+  
+    <article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2015/10/25/重新起航/">
+  <time datetime="2015-10-25T05:15:13.000Z">
+    2015-10-25
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title"><a href="/2015/10/25/重新起航/">重新起航。</a></h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <p><img src="/images/15102501.jpg" alt="重新起航"></p>
+
+    
+  </div>
+  <footer class="end-sep">
+    
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+  
+
+  <nav id="pagination">
+  
+    <a href="/" class="prev">上一页</a>
+  
+  
+  <div class="clearfix"></div>
+</nav>
+
+</div>
+  </div>
+  <footer id="footer"><div class="copyright">
+  
+  &copy; 2016 <a href="/">Zfan</a>
+  
+</div>
+<div class="theme-copyright">
+  Theme by <a href="https://github.com/orderedlist" target="_blank">orderedlist</a>
+   | 
+  Redesign by <a href="http://heroicyang.com/" target="_blank">Heroic Yang</a>
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+<script src="/js/scale.fix.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+  (function($){
+    $('.fancybox').fancybox();
+  })(jQuery);
+</script>
+
+</body>
+</html>
