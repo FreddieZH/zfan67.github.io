@@ -38,9 +38,9 @@
   <nav class="nav">
     <ul>
       
-        <li><a href="/">Home</a></li>
+        <li><a href="/categories">categories</a></li>
       
-        <li><a href="/archives">archives</a></li>
+        <li><a href="/tags">tags</a></li>
       
       
     </ul>
@@ -54,86 +54,54 @@
 
 
   
+  
+    
+    
+      
+      
+      <section class="archives-wrapper">
+        
+        <h2 class="archives-title archives-year">
+          <a href="/archives/2015">2015</a>
+        </h2>
+        
+        <div class="archives">
+    
     <article class="post">
   <header>
-    
-      <div class="icon"></div>
-      <a href="/2015/10/28/解决在iOS8环境下,当用户关闭定位服务总开关时,无法将APP定位子选项加入定位权限列表的问题/">
+    <a href="/2015/10/28/解决在iOS8环境下,当用户关闭定位服务总开关时,无法将APP定位子选项加入定位权限列表的问题/">
   <time datetime="2015-10-27T16:08:39.000Z">
-    2015-10-28
+    Oct 28
   </time>
 </a>
-    
     
   
     <h1 class="title"><a href="/2015/10/28/解决在iOS8环境下,当用户关闭定位服务总开关时,无法将APP定位子选项加入定位权限列表的问题/">解决在iOS8环境下,当用户关闭定位服务总开关时,无法将APP定位子选项加入定位权限列表的问题</a></h1>
   
 
   </header>
-  
-  <div class="entry">
-    
-      <pre><code>关键点：
-<span class="pp">- <span class="params">(void)</span>locationManager:<span class="params">(<span class="variable">CLLocationManager</span> *)</span>manager didChangeAuthorizationStatus:<span class="params">(<span class="variable">CLAuthorizationStatus</span>)</span>status代理方法</span>
-</code></pre><p>iOS7环境下当APP首次调用startUpdatingLocation方法开启定位服务时，系统会自动将该APP的定位子选项加入设置中的定位权限列表，并弹框提示用户是否为该APP定位服务授权。</p>
-<p>可是在iOS8环境下，使用定位服务的方式较之前版本发生改变，调用startUpdatingLocation方法前需要调用requestWhenInUseAuthorization方法来请求定位权限； 但是在用户关闭定位服务总开关时，单单使用该方法却无法将APP定位的子选项加入定位权限列表，用户在打开定位总开关后是找不到该APP的子选项的，除非在定位服务总开关打开的情况下才能正常加入权限列表；</p>
-<p>解决方法是将开启定位的startUpdatingLocation方法放在didChangeAuthorizationStatus:代理方法中调用：<br>1）首先调用requestWhenInUseAuthorization方法请求定位权限（iOS7及以前无需调用此方法）;<br>2）然后在didChangeAuthorizationStatus:代理方法中调用startUpdatingLocation方法请求一次定位；<br>采用这种方式解决，无论定位服务的总开关是否打开，都能将APP的定位子选项加入定位权限列表。</p>
-
-    
-  </div>
-  <footer class="end-sep">
-    
-      
-      
-    
-    <div class="clearfix"></div>
-  </footer>
 </article>
-
-
   
+    
+    
     <article class="post">
   <header>
-    
-      <div class="icon"></div>
-      <a href="/2015/10/25/重新起航/">
+    <a href="/2015/10/25/重新起航/">
   <time datetime="2015-10-25T05:15:13.000Z">
-    2015-10-25
+    Oct 25
   </time>
 </a>
-    
     
   
     <h1 class="title"><a href="/2015/10/25/重新起航/">重新起航。</a></h1>
   
 
   </header>
-  
-  <div class="entry">
-    
-      <p><img src="/images/15102501.jpg" alt="重新起航"></p>
-
-    
-  </div>
-  <footer class="end-sep">
-    
-      
-      
-    
-    <div class="clearfix"></div>
-  </footer>
 </article>
-
-
-  
-
-  <nav id="pagination">
-  
-    <a href="/" class="prev">上一页</a>
   
   
-  <div class="clearfix"></div>
-</nav>
+    </div></section>
+  
 
 </div>
   </div>

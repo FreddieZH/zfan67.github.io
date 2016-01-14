@@ -38,9 +38,9 @@
   <nav class="nav">
     <ul>
       
-        <li><a href="/">Home</a></li>
+        <li><a href="/categories">categories</a></li>
       
-        <li><a href="/archives">archives</a></li>
+        <li><a href="/tags">tags</a></li>
       
       
     </ul>
@@ -54,574 +54,202 @@
 
 
   
+  
+    
+    
+      
+      
+      <section class="archives-wrapper">
+        
+        <h2 class="archives-title archives-year">
+          <a href="/archives/2016">2016</a>
+        </h2>
+        
+        <div class="archives">
+    
     <article class="post">
   <header>
-    
-      <div class="icon"></div>
-      <a href="/2016/01/09/数据结构学习笔记(四)--顺序表和链表的比较/">
+    <a href="/2016/01/09/数据结构学习笔记(四)--顺序表和链表的比较/">
   <time datetime="2016-01-09T07:40:40.000Z">
-    2016-01-09
+    Jan 09
   </time>
 </a>
-    
     
   
     <h1 class="title"><a href="/2016/01/09/数据结构学习笔记(四)--顺序表和链表的比较/">数据结构学习笔记(四)--顺序表和链表的比较</a></h1>
   
 
   </header>
-  
-  <div class="entry">
-    
-      <h3 id="线性表实现方式的比较">线性表实现方式的比较</h3><ul>
-<li>顺序表的主要优点<ul>
-<li>没有使用指针, 不用花费额外开销;  </li>
-<li>线性表元素的读访问非常简洁便利;  </li>
-</ul>
-</li>
-<li>链表的主要优点<ul>
-<li>无需事先知道线性表的长度;  </li>
-<li>允许线性表的长度动态变化;  </li>
-<li>能够使用经常插入删除内部元素的情况;  </li>
-</ul>
-</li>
-<li>总结<ul>
-<li>顺序表是存储静态数据的不二选择;  </li>
-<li>链表式存储动态变化数据的良方;  </li>
-</ul>
-</li>
-</ul>
-<h3 id="顺序表和链表的比较">顺序表和链表的比较</h3><ul>
-<li>顺序表<ul>
-<li>插入/删除运算时间代价O(n), 查找则可常数时间完成;  </li>
-<li>预先申请固定长度的连续空间;  </li>
-<li>如果整个数组元素很满, 则没有结构性存储开销;  </li>
-</ul>
-</li>
-<li>链表<ul>
-<li>插入/删除运算时间代价O(1), 但找到第i个元素运算时间代价为O(n);  </li>
-<li>存储利用指针, 动态地按照需要为表中新的元素分配存储空间;  </li>
-<li>每个元素都有结构性存储开销;  </li>
-</ul>
-</li>
-</ul>
-<h3 id="存储密度对比">存储密度对比</h3><ul>
-<li>已知空间需求:<ul>
-<li>顺序表的空间需求为DE;  </li>
-<li>链表的空间需求为n(P + E);  </li>
-</ul>
-</li>
-</ul>
-<blockquote>
-<ul>
-<li>n越大, 顺序表的空间效率就更高;  </li>
-<li>如果P = E, 则临界值为n = D / 2; 即当顺序表的存储元素超过长度的一半时, 顺序表的存储效率便超过链表;  </li>
-</ul>
-</blockquote>
-<h3 id="应用场合的选择">应用场合的选择</h3><ul>
-<li>顺序表不适用的场合<ul>
-<li>经常插入删除时, 不宜使用顺序表;  </li>
-<li>线性表的最大长度也是一个重要因素;  </li>
-</ul>
-</li>
-<li>链表不适合的场合<ul>
-<li>当读取操作比插入删除操作频率大时, 不应选择链表;  </li>
-<li>当指针的存储开销, 和整个节点内容所占空间相比例较大时, 应该慎重选择;  </li>
-</ul>
-</li>
-</ul>
-
-    
-  </div>
-  <footer class="end-sep">
-    
-      
-      
-    
-    <div class="clearfix"></div>
-  </footer>
 </article>
-
-
   
+    
+    
     <article class="post">
   <header>
-    
-      <div class="icon"></div>
-      <a href="/2016/01/08/数据结构学习笔记(三)--线性表/">
+    <a href="/2016/01/08/数据结构学习笔记(三)--线性表/">
   <time datetime="2016-01-08T07:42:50.000Z">
-    2016-01-08
+    Jan 08
   </time>
 </a>
-    
     
   
     <h1 class="title"><a href="/2016/01/08/数据结构学习笔记(三)--线性表/">数据结构学习笔记(三)--线性表</a></h1>
   
 
   </header>
-  
-  <div class="entry">
-    
-      <h3 id="线性表的概念">线性表的概念</h3><p>线性表简称表, 是零个或多个元素的有穷序列.</p>
-<h3 id="线性结构">线性结构</h3><p>有一个唯一的开始节点, 其没有前驱, 有一个唯一的直接后继;<br>有一个唯一的终止节点, 其没有后继, 有一个唯一的直接前驱;<br>其他的节点称为内部节点, 每一个内部节点有且仅有一个唯一的直接前驱和一个唯一的直接后继;<br>具有反对称性和传递性;  </p>
-<h3 id="线性结构的特点">线性结构的特点</h3><blockquote>
-<ul>
-<li>均匀性:同一线性表的各数据元素必定具有相同的数据类型和长度;</li>
-<li>有序性:数据元素之间的相对位置是线性的;</li>
-</ul>
-</blockquote>
-<h3 id="线性结构的分类">线性结构的分类</h3><p>按照复杂程度划分:</p>
-<blockquote>
-<ul>
-<li>简单的:线性表,栈,队列,散列表等等;</li>
-<li>复杂的:广义表,多维数组,文件等等;</li>
-</ul>
-</blockquote>
-<p>按照访问方式划分:</p>
-<blockquote>
-<ul>
-<li>直接访问型</li>
-<li>顺序访问型</li>
-<li>目录索引型</li>
-</ul>
-</blockquote>
-<p>按照操作划分:  </p>
-<blockquote>
-<ul>
-<li>线性表:不限制操作形式,分为顺序表或链表;  </li>
-<li>栈:插入和删除都限制在一端进行;  </li>
-<li>队列:插入操作在表的一端,删除操作在表的另一端;  </li>
-</ul>
-</blockquote>
-<h3 id="线性表的存储结构">线性表的存储结构</h3><p>1.顺序表</p>
-<p>按照索引值从小到大存放在一片相邻的区域内;紧凑结构,存储密度为1;</p>
-<p>2.链表</p>
-<blockquote>
-<ul>
-<li>单链表  </li>
-<li>双链表  </li>
-<li>循环链表</li>
-</ul>
-</blockquote>
-<h3 id="顺序表">顺序表</h3><p>顺序表也称<code>向量</code>,采用定长的一维数组存储结构;</p>
-<p>顺序表的主要特性:</p>
-<blockquote>
-<p>元素的类型相同<br>元素<code>顺序</code>地存储在连续的存储空间中,每一个元素有相同的索引值;<br>使用常数作为向量长度  </p>
-</blockquote>
-<p>顺序表的插入和删除时间代价相同,均为O(n);</p>
-<h3 id="链表">链表</h3><p>链表通过<code>指针</code>把它的一串存储节点链接成一个链;</p>
-<p>存储节点由两部分组成:  </p>
-<blockquote>
-<p>数据域 + 指针域(后继地址)  </p>
-</blockquote>
-<p>链表的分类:</p>
-<blockquote>
-<ul>
-<li>单链表  </li>
-<li>双链表  </li>
-<li>循环链表  </li>
-</ul>
-</blockquote>
-<h3 id="单链表">单链表</h3><p>带头结点的单链表: </p>
-<blockquote>
-<p>整个单链表具有一个头结点: head;<br>第一个结点: head -&gt; next, head != NULL;<br>空表判断: head -&gt; next == NULL;<br>当前结点(一般由其前驱表示): fence -&gt; next;  </p>
-</blockquote>
-<p>单链表的运算:</p>
-<blockquote>
-<p>对于任何一个结点操作, 必须先找到它;<br>寻找单链表中的任何一个节点, 必须从第一个结点开始;  </p>
-</blockquote>
-<p>单链表的时间复杂度: O(n);  </p>
-<h3 id="双链表">双链表</h3><p>为了弥补单链表的不足, 产生了双链表;  </p>
-<blockquote>
-<p>单链表的 next 字段只能仅仅指向后继结点, 不能有效找到前驱;<br>双链表增加了一个指向前驱的指针;  </p>
-</blockquote>
-<h3 id="循环链表">循环链表</h3><p>将单链表或者双链表的头尾结点连接起来, 就是一个循环链表;<br>不增加额外存储花销, 却给不少操作带来了方便; 从循环链表的任何一个结点出发, 都能访问到表中的其他节点;  </p>
-<h3 id="链表的边界条件">链表的边界条件</h3><ol>
-<li>几个特殊点的处理  </li>
-</ol>
-<blockquote>
-<ul>
-<li>头指针处理  </li>
-<li>非循环链表表尾结点的指针域保持为NULL;  </li>
-<li>循环链表表尾结点的指针指回头结点;  </li>
-</ul>
-</blockquote>
-<ol>
-<li>链表处理  </li>
-</ol>
-<blockquote>
-<ul>
-<li>空链表的特殊处理  </li>
-<li>插入或删除结点时指针勾链的顺序;  </li>
-<li>指针移动的正确性;  </li>
-</ul>
-</blockquote>
-
-    
-  </div>
-  <footer class="end-sep">
-    
-      
-      
-    
-    <div class="clearfix"></div>
-  </footer>
 </article>
-
-
   
+    
+    
     <article class="post">
   <header>
-    
-      <div class="icon"></div>
-      <a href="/2016/01/07/摇滚音乐史学习笔记(一)--摇滚乐诞生之前/">
+    <a href="/2016/01/07/摇滚音乐史学习笔记(一)--摇滚乐诞生之前/">
   <time datetime="2016-01-07T07:29:07.000Z">
-    2016-01-07
+    Jan 07
   </time>
 </a>
-    
     
   
     <h1 class="title"><a href="/2016/01/07/摇滚音乐史学习笔记(一)--摇滚乐诞生之前/">摇滚音乐史学习笔记(一)--摇滚乐诞生之前</a></h1>
   
 
   </header>
-  
-  <div class="entry">
-    
-      <h3 id="摇滚乐诞生的时间">摇滚乐诞生的时间</h3><p>大多数学者认为，摇滚乐诞生于1955年前后；</p>
-<h3 id="摇滚乐的起源">摇滚乐的起源</h3><p>摇滚乐是1955年之前流行乐坛中三种主要音乐风格混合后的产物：</p>
-<blockquote>
-<p>主流流行乐 (Mainstream Pop)<br>西部乡村音乐 (Country and Western Music)<br>R&amp;B  </p>
-</blockquote>
-<h3 id="1955年前的主流流行音乐">1955年前的主流流行音乐</h3><p>在摇滚乐诞生之前,主流流行乐最重要的部分是<code>歌曲本身</code>，而不是特定的表演版本；</p>
-<p>当时的主流流行音乐产业是由音乐发行商驱动的，他们的主要工作是替写歌的人发行他们的作品,他们出售这些歌曲的主要方式还是<code>卖曲谱</code>，人们会把曲谱买回家并且演奏它们；而摇滚乐并不十分依赖曲谱，这成为其后来能打破流行音乐市场的原因之一；</p>
-<p>在那时，歌曲创作者和表演者被看作两种不同的职业；而从六十年代中期开始情况发生了改变,许多歌手都演唱自己写的歌;</p>
-<h3 id="1955年之前主流流行音乐歌手及作品">1955年之前主流流行音乐歌手及作品</h3><blockquote>
-<h4 id="Bing_Crospy">Bing Crospy</h4><p>“I’ve Got a Pocketful of Dreams” (1938)<br>“Only Forever” (1940)<br>“Swinging On a Star” (1944)<br>“White Christmas” (1942,1945)  </p>
-<h4 id="Glenn_Miller_Orchestra">Glenn Miller Orchestra</h4><p>“String of Pearls” (1942)  </p>
-<h4 id="The_Andrews_Sisters">The Andrews Sisters</h4><p>“In the Mood”<br>“Bei Mir bist du Schoen” (1938)<br>“Shoo Shoo Baby” (1943)<br>“Rum and Coca Cola” (1945)  </p>
-<h4 id="The_Mills_Brothers">The Mills Brothers</h4><p>“Paper Doll” (1943)<br>“You Always hurt The One You Love” (1944)</p>
-<h4 id="Frank_Sinatra">Frank Sinatra</h4><p>“Nancy(with the Laughing Face)” (1945)<br>“All of Me” (1948)<br>“I’ve Got a Crush On You” (1948)  </p>
-<h4 id="Johnnie_Ray">Johnnie Ray</h4><p>“Cry” (1951)  </p>
-<h4 id="Tony_Bennett">Tony Bennett</h4><p>“Rags to Riches” (1953)</p>
-<h4 id="Eddie_Fisher">Eddie Fisher</h4><p>“Oh!My Papa” (1954)</p>
-<h4 id="Patti_Page">Patti Page</h4><p>“Tennessee Waltz” (1950)</p>
-<h4 id="Les_Paul_and_Mary_Ford">Les Paul and Mary Ford</h4><p>“How High The Moon” (1951)</p>
-</blockquote>
-
-    
-  </div>
-  <footer class="end-sep">
-    
-      
-      
-    
-    <div class="clearfix"></div>
-  </footer>
 </article>
-
-
   
+    
+    
     <article class="post">
   <header>
-    
-      <div class="icon"></div>
-      <a href="/2016/01/06/数据结构学习笔记(二)/">
+    <a href="/2016/01/06/数据结构学习笔记(二)/">
   <time datetime="2016-01-06T05:20:50.000Z">
-    2016-01-06
+    Jan 06
   </time>
 </a>
-    
     
   
     <h1 class="title"><a href="/2016/01/06/数据结构学习笔记(二)/">数据结构学习笔记(二)--算法</a></h1>
   
 
   </header>
-  
-  <div class="entry">
-    
-      <h3 id="基本算法分类">基本算法分类</h3><pre><code>穷举法
-回溯,搜索
-递归分治
-贪心法
-动态规划
-</code></pre><h3 id="大O表示法的运算规则">大O表示法的运算规则</h3><pre><code>加法规则: f1(n) + f2(n) = O(max(f1(n), f2(n)))
-乘法规则: f1(n) * f2(n) = O(f1(n) * f2(n))
-</code></pre><h3 id="大Ω表示法">大Ω表示法</h3><p>大O表示法和大Ω表示法唯一区别在于不等式的方向;</p>
-<p>采用大Ω表示法时,最好找出函数增值率所有下限中最大的下限;</p>
-<h3 id="大Θ表示法">大Θ表示法</h3><p>当上、下限相同时可以用大Θ表示法;</p>
-
-    
-  </div>
-  <footer class="end-sep">
-    
-      
-      
-    
-    <div class="clearfix"></div>
-  </footer>
 </article>
-
-
   
+    
+    
     <article class="post">
   <header>
-    
-      <div class="icon"></div>
-      <a href="/2016/01/06/数据结构学习笔记(一)/">
+    <a href="/2016/01/06/数据结构学习笔记(一)/">
   <time datetime="2016-01-06T05:20:42.000Z">
-    2016-01-06
+    Jan 06
   </time>
 </a>
-    
     
   
     <h1 class="title"><a href="/2016/01/06/数据结构学习笔记(一)/">数据结构学习笔记(一)</a></h1>
   
 
   </header>
-  
-  <div class="entry">
-    
-      <h3 id="数据的逻辑结构">数据的逻辑结构</h3><p>根据数据元素关系间的基本特性，有四种基本数据结构：</p>
-<pre><code>集合（数据元素同属一个集合，但无其他关系）
-线性结构（一对一）
-树形结构（一对多）
-图状结构（多对多）
-</code></pre><h3 id="数据的物理结构">数据的物理结构</h3><p>亦称存储结构，是数据在计算机存储器内的表示。存储结构可分为4大类:</p>
-<pre><code>顺序（借助元素在存储器中的相对位置来表示）
-链式（借助指示元素存储地址的指针来表示）
-索引
-散列
-</code></pre><h3 id="数据的运算">数据的运算</h3><p>常用的数据运算方法有5种:</p>
-<pre><code>插入,删除,修改,查找,排序
-</code></pre><h3 id="算法特性">算法特性</h3><pre><code>输入,输出,有穷性,确定性,可行性
-</code></pre><h3 id="算法效率的度量">算法效率的度量</h3><p><code>O(1) &lt; O(logn) &lt; O(n) &lt; O(nlogn) &lt; O(n²) &lt; O(n³) &lt; O(2的n次方) &lt; O(n!) &lt; O(n的n次方)</code></p>
-<h3 id="时间与空间互换">时间与空间互换</h3>
-    
-  </div>
-  <footer class="end-sep">
-    
-      
-      
-    
-    <div class="clearfix"></div>
-  </footer>
 </article>
-
-
   
+    
+    
     <article class="post">
   <header>
-    
-      <div class="icon"></div>
-      <a href="/2016/01/06/内存管理学习笔记/">
+    <a href="/2016/01/06/内存管理学习笔记/">
   <time datetime="2016-01-06T05:20:18.000Z">
-    2016-01-06
+    Jan 06
   </time>
 </a>
-    
     
   
     <h1 class="title"><a href="/2016/01/06/内存管理学习笔记/">内存管理学习笔记</a></h1>
   
 
   </header>
-  
-  <div class="entry">
-    
-      <h3 id="1-内存管理的必要性">1.内存管理的必要性</h3><p>C语言中需要通过malloc()和free()函数对内存进行管理；</p>
-<p>如果程序未释放不再使用的内存，则会发生内存泄露；</p>
-<p>指向已经被释放的对象的指针，叫做悬垂指针或野指针；如果访问了已经被释放的内存，则会发生数据错误；</p>
-<p>Objective-C会向类对象发送alloc消息来生成实例对象，alloc的作用就是分配内存；alloc返回的对象是id类型，id实质上就是指针类型，其指向的就是为实例对象分配的内存；</p>
-<h3 id="2-引用计数">2.引用计数</h3><p>Objective-C使用了一种动态的内存管理方式，称为引用计数；每个对象都有一个与之相关的整数，称作它的引用计数；系统会动态跟踪对象被引用的次数，当该对象被retain时就将其引用计数加1，当该对象被release时其引用计数减1，当对象的引用次数为0时，系统会释放这个对象并回收其占用的内存；</p>
-<p>自动引用计数(ARC)会在程序编译期间自动加入合适的内存管理方法；</p>
-<p>释放内存的方法是dealloc方法，这是一个实例方法，当对象的引用计数为0时，系统会调用该对象的dealloc方法释放其内存，通常不允许在程序中直接调用该方法；</p>
-<p>retain是”保持”的意思，对一个对象发送retain消息，就意味着拥有这个对象的所有权；给对象发送release消息意味放弃该对象的所有权；</p>
-
-    
-  </div>
-  <footer class="end-sep">
-    
-      
-      
-    
-    <div class="clearfix"></div>
-  </footer>
 </article>
-
-
   
+    
+    
     <article class="post">
   <header>
-    
-      <div class="icon"></div>
-      <a href="/2016/01/06/为什么Objective-C不能在栈上创建对象/">
+    <a href="/2016/01/06/为什么Objective-C不能在栈上创建对象/">
   <time datetime="2016-01-06T02:29:32.000Z">
-    2016-01-06
+    Jan 06
   </time>
 </a>
-    
     
   
     <h1 class="title"><a href="/2016/01/06/为什么Objective-C不能在栈上创建对象/">为什么Objective-C不能在栈上创建对象</a></h1>
   
 
   </header>
-  
-  <div class="entry">
-    
-      <p>本文参考：<a href="http://blog.csdn.net/cocoarannie/article/details/9956281" target="_blank" rel="external">http://blog.csdn.net/cocoarannie/article/details/9956281</a></p>
-<p>为了搞清楚这个问题，首先需要了解一些预备知识：  </p>
-<p>一个由C/C++编译的程序所占用的内存主要分为以下几个部分：<br>1.栈区(stack)–由编译器自动分配释放，主要存放函数的参数，局部变量的值等；操作方式类似于数据结构的栈；<br>2.堆区(heap)–一般由程序员分配释放，程序结束后会被系统统一回收；需要注意它与数据结构中的堆有区别，分配方式类似于链表；<br>3.全局区(静态区域 static)–全局变量和静态变量的存储是放在一起的，初始化的全局变量和静态变量在一块区域，未初始化的全局变量和未初始化的静态变量在另一块区域，程序结束后由系统统一释放；<br>4.文字常量区–常量字符串就存放在这里；程序结束后由系统统一释放；<br>5.程序代码区–存放函数体的二进制代码；</p>
-
-    
-  </div>
-  <footer class="end-sep">
-    
-      
-      
-    
-    <div class="clearfix"></div>
-  </footer>
 </article>
-
-
   
+    
+    
+      
+        </div></section>
+      
+      
+      <section class="archives-wrapper">
+        
+        <h2 class="archives-title archives-year">
+          <a href="/archives/2015">2015</a>
+        </h2>
+        
+        <div class="archives">
+    
     <article class="post">
   <header>
-    
-      <div class="icon"></div>
-      <a href="/2015/11/20/解决升级Xcode7.1后,Cordova工程Archive打包找不到头文件的问题/">
+    <a href="/2015/11/20/解决升级Xcode7.1后,Cordova工程Archive打包找不到头文件的问题/">
   <time datetime="2015-11-20T15:48:43.000Z">
-    2015-11-20
+    Nov 20
   </time>
 </a>
-    
     
   
     <h1 class="title"><a href="/2015/11/20/解决升级Xcode7.1后,Cordova工程Archive打包找不到头文件的问题/">解决升级Xcode7.1后，Cordova工程Archive打包找不到头文件的问题</a></h1>
   
 
   </header>
-  
-  <div class="entry">
-    
-      <p>在Build Settings-&gt;Search Paths-&gt;Header Search Paths-&gt;Release下添加如下路径：</p>
-<pre><code>“<span class="variable">$(</span><span class="constant">OBJROOT</span>)/<span class="constant">UninstalledProducts</span>/<span class="variable">$(</span><span class="constant">PLATFORM_NAME</span>)/<span class="keyword">include</span>”
-</code></pre><p>原文地址：<a href="http://forum.ionicframework.com/t/cordova-cdvviewcontroller-h-file-not-found-in-xcode-7-1-beta/32232" target="_blank" rel="external">http://forum.ionicframework.com/t/cordova-cdvviewcontroller-h-file-not-found-in-xcode-7-1-beta/32232</a></p>
-
-    
-  </div>
-  <footer class="end-sep">
-    
-      
-      
-    
-    <div class="clearfix"></div>
-  </footer>
 </article>
-
-
   
+    
+    
     <article class="post">
   <header>
-    
-      <div class="icon"></div>
-      <a href="/2015/10/29/iOS开发--消息分发机制/">
+    <a href="/2015/10/29/iOS开发--消息分发机制/">
   <time datetime="2015-10-29T01:25:24.000Z">
-    2015-10-29
+    Oct 29
   </time>
 </a>
-    
     
   
     <h1 class="title"><a href="/2015/10/29/iOS开发--消息分发机制/">消息机制</a></h1>
   
 
   </header>
-  
-  <div class="entry">
-    
-      <ol>
-<li>objc_msgSend函数<br>在Objective-C语言中，消息直到运行时才会与具体的方法实现进行绑定。OC编译器将此种格式的消息<br> [receiver message]<br>的转换为objc_msgSend的函数调用。这个函数将消息的接受者与该方法的名称，即该方法的selector，作为它的两个重要参数：<br> objc_msgSend(receiver, selector)<br>该消息中的各个参数也通过objc_msgSend函数传递：<br> objc_msgSend(receiver, selector, arg1, arg2, …)</li>
-</ol>
-
-    
-  </div>
-  <footer class="end-sep">
-    
-      
-      
-    
-    <div class="clearfix"></div>
-  </footer>
 </article>
-
-
   
+    
+    
     <article class="post">
   <header>
-    
-      <div class="icon"></div>
-      <a href="/2015/10/28/MAC OSX通过Terminal命令行控制蓝牙状态开关/">
+    <a href="/2015/10/28/MAC OSX通过Terminal命令行控制蓝牙状态开关/">
   <time datetime="2015-10-28T15:17:36.000Z">
-    2015-10-28
+    Oct 28
   </time>
 </a>
-    
     
   
     <h1 class="title"><a href="/2015/10/28/MAC OSX通过Terminal命令行控制蓝牙状态开关/">MAC OSX通过Terminal命令行控制蓝牙状态开关</a></h1>
   
 
   </header>
-  
-  <div class="entry">
-    
-      <pre><code>defaults write /Library/Preferences/com<span class="class">.apple</span><span class="class">.Bluetooth</span><span class="class">.plist</span> ControllerPowerState <span class="number">0</span>
-#关闭蓝牙服务
-
-defaults write /Library/Preferences/com<span class="class">.apple</span><span class="class">.Bluetooth</span><span class="class">.plist</span> ControllerPowerState <span class="number">1</span>
-#打开蓝牙服务
-
-killall blued
-#结束所有蓝牙服务进程
-
-launchctl unload /System/Library/LaunchDaemons/com<span class="class">.apple</span><span class="class">.blued</span><span class="class">.plist</span>
-#卸载蓝牙Daemon
-
-launchctl load /System/Library/LaunchDaemons/com<span class="class">.apple</span><span class="class">.blued</span><span class="class">.plist</span>
-#载入蓝牙Daemon
-
-launchctl start com<span class="class">.apple</span><span class="class">.blued</span>
-#重启蓝牙Daemon
-</code></pre><p>原文地址：<a href="https://discussions.apple.com/thread/2619301?tstart=0" target="_blank" rel="external">https://discussions.apple.com/thread/2619301?tstart=0</a></p>
-
-    
-  </div>
-  <footer class="end-sep">
-    
-      
-      
-    
-    <div class="clearfix"></div>
-  </footer>
 </article>
-
-
-  
-
-  <nav id="pagination">
   
   
-    <a href="/page/2/" class="next">下一页</a>
+    </div></section>
   
-  <div class="clearfix"></div>
-</nav>
 
 </div>
   </div>
