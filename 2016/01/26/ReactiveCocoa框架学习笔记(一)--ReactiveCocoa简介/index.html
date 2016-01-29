@@ -1,0 +1,143 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  
+  <title>ReactiveCocoa框架学习笔记(一)--ReactiveCocoa简介 | 永远站在鸡蛋一边</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  
+    <meta name="author" content="Zfan">
+  
+  
+    <meta name="description" content="1. 编程思想1. 面向过程: 处理事件以过程为核心, 一步一步实现;  
+2. 面向对象;  
+3. 链式编程思想: 将多个操作通过.符号链接在一起成为一句代码, 使代码可读性好;  
+4. 响应式编程: 不需要考虑调用程序, 只需要考虑结果, 事件像流一样传播出去, 然后影响结果;  
+5. 函数式编程: 把操作携程一系列嵌套的函数或者方法调用;  
+2.  ReactiveCocoa的作用将">
+  
+  <meta name="description" content="1. 编程思想1. 面向过程: 处理事件以过程为核心, 一步一步实现;  
+2. 面向对象;  
+3. 链式编程思想: 将多个操作通过.符号链接在一起成为一句代码, 使代码可读性好;  
+4. 响应式编程: 不需要考虑调用程序, 只需要考虑结果, 事件像流一样传播出去, 然后影响结果;  
+5. 函数式编程: 把操作携程一系列嵌套的函数或者方法调用;  
+2.  ReactiveCocoa的作用将">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ReactiveCocoa框架学习笔记(一)--ReactiveCocoa简介">
+<meta property="og:url" content="http://zvan.xyz/2016/01/26/ReactiveCocoa框架学习笔记(一)--ReactiveCocoa简介/index.html">
+<meta property="og:site_name" content="永远站在鸡蛋一边">
+<meta property="og:description" content="1. 编程思想1. 面向过程: 处理事件以过程为核心, 一步一步实现;  
+2. 面向对象;  
+3. 链式编程思想: 将多个操作通过.符号链接在一起成为一句代码, 使代码可读性好;  
+4. 响应式编程: 不需要考虑调用程序, 只需要考虑结果, 事件像流一样传播出去, 然后影响结果;  
+5. 函数式编程: 把操作携程一系列嵌套的函数或者方法调用;  
+2.  ReactiveCocoa的作用将">
+<meta property="og:updated_time" content="2016-01-29T03:53:39.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ReactiveCocoa框架学习笔记(一)--ReactiveCocoa简介">
+<meta name="twitter:description" content="1. 编程思想1. 面向过程: 处理事件以过程为核心, 一步一步实现;  
+2. 面向对象;  
+3. 链式编程思想: 将多个操作通过.符号链接在一起成为一句代码, 使代码可读性好;  
+4. 响应式编程: 不需要考虑调用程序, 只需要考虑结果, 事件像流一样传播出去, 然后影响结果;  
+5. 函数式编程: 把操作携程一系列嵌套的函数或者方法调用;  
+2.  ReactiveCocoa的作用将">
+  
+  
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+
+<body>
+  <div class="wrapper">
+    <header id="header">
+  <div class="title">
+    <h1><a href="/">永远站在鸡蛋一边</a></h1>
+    <p><a href="/">--Zfan的记事簿--</a></p>
+  </div>
+  <nav class="nav">
+    <ul>
+      
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+  <div class="clearfix"></div>
+</header>
+    <div class="content"><article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2016/01/26/ReactiveCocoa框架学习笔记(一)--ReactiveCocoa简介/">
+  <time datetime="2016-01-26T07:41:54.000Z">
+    2016-01-26
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title">ReactiveCocoa框架学习笔记(一)--ReactiveCocoa简介</h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <h3 id="1-_编程思想">1. 编程思想</h3><pre><code><span class="number">1.</span> 面向过程: 处理事件以过程为核心, 一步一步实现;  
+<span class="number">2.</span> 面向对象;  
+<span class="number">3.</span> 链式编程思想: 将多个操作通过.符号链接在一起成为一句代码, 使代码可读性好;  
+<span class="number">4.</span> 响应式编程: 不需要考虑调用程序, 只需要考虑结果, 事件像流一样传播出去, 然后影响结果;  
+<span class="number">5.</span> 函数式编程: 把操作携程一系列嵌套的函数或者方法调用;  
+</code></pre><h3 id="2-_ReactiveCocoa的作用">2.  ReactiveCocoa的作用</h3><p>将action, delegate, KVO, callback等等事件处理方式统一通过RAC来处理, 这样可以<code>将处理事件的代码和监听事件的代码放在一起</code>, 方便程序员来管理, 符合开发中<code>高聚合, 低耦合</code>的思想;  </p>
+
+    
+  </div>
+  <footer>
+    
+      
+  <div class="categories">
+    <a class="categories-link" href="/categories/iOS开发/">iOS开发</a>
+  </div>
+
+      
+  <div class="tags">
+    <a class="tags-link" href="/tags/ReactiveCocoa/">ReactiveCocoa</a>, <a class="tags-link" href="/tags/iOS/">iOS</a>
+  </div>
+
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+</div>
+  </div>
+  <footer id="footer"><div class="copyright">
+  
+  &copy; 2016 <a href="/">Zfan</a>
+  
+</div>
+<div class="theme-copyright">
+  Theme by <a href="https://github.com/orderedlist" target="_blank">orderedlist</a>
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+<script src="/js/scale.fix.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+  (function($){
+    $('.fancybox').fancybox();
+  })(jQuery);
+</script>
+
+</body>
+</html>

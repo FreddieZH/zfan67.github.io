@@ -1,0 +1,172 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  
+  <title>ReactiveCocoa学习笔记(二)--链式编程 | 永远站在鸡蛋一边</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  
+    <meta name="author" content="Zfan">
+  
+  
+    <meta name="description" content="首先观察使用Masonry框架的这段代码:  
+[View mas_makeConstraints:^(MASConstrainMaker *make) {
+    make.left.top.equalTo(@10);
+    make.right.bottom.equalTo(@-10);
+}];
+它的的作用是为View的上下左右各添加10像素间隔的约束;
+这段代码的内部实现运用了链式编程思想">
+  
+  <meta name="description" content="首先观察使用Masonry框架的这段代码:  
+[View mas_makeConstraints:^(MASConstrainMaker *make) {
+    make.left.top.equalTo(@10);
+    make.right.bottom.equalTo(@-10);
+}];
+它的的作用是为View的上下左右各添加10像素间隔的约束;
+这段代码的内部实现运用了链式编程思想">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ReactiveCocoa学习笔记(二)--链式编程">
+<meta property="og:url" content="http://zvan.xyz/2016/01/29/ReactiveCocoa学习笔记(二)--链式编程/index.html">
+<meta property="og:site_name" content="永远站在鸡蛋一边">
+<meta property="og:description" content="首先观察使用Masonry框架的这段代码:  
+[View mas_makeConstraints:^(MASConstrainMaker *make) {
+    make.left.top.equalTo(@10);
+    make.right.bottom.equalTo(@-10);
+}];
+它的的作用是为View的上下左右各添加10像素间隔的约束;
+这段代码的内部实现运用了链式编程思想">
+<meta property="og:updated_time" content="2016-01-29T08:04:14.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ReactiveCocoa学习笔记(二)--链式编程">
+<meta name="twitter:description" content="首先观察使用Masonry框架的这段代码:  
+[View mas_makeConstraints:^(MASConstrainMaker *make) {
+    make.left.top.equalTo(@10);
+    make.right.bottom.equalTo(@-10);
+}];
+它的的作用是为View的上下左右各添加10像素间隔的约束;
+这段代码的内部实现运用了链式编程思想">
+  
+  
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+
+<body>
+  <div class="wrapper">
+    <header id="header">
+  <div class="title">
+    <h1><a href="/">永远站在鸡蛋一边</a></h1>
+    <p><a href="/">--Zfan的记事簿--</a></p>
+  </div>
+  <nav class="nav">
+    <ul>
+      
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+  <div class="clearfix"></div>
+</header>
+    <div class="content"><article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2016/01/29/ReactiveCocoa学习笔记(二)--链式编程/">
+  <time datetime="2016-01-29T04:43:23.000Z">
+    2016-01-29
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title">ReactiveCocoa学习笔记(二)--链式编程</h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <p>首先观察使用Masonry框架的这段代码:  </p>
+<pre><code><span class="list">[<span class="keyword">View</span> mas_makeConstraints:^<span class="list">(<span class="keyword">MASConstrainMaker</span> *make)</span> {
+    make.left.top.equalTo<span class="list">(<span class="keyword">@10</span>)</span><span class="comment">;</span>
+    make.right.bottom.equalTo<span class="list">(<span class="keyword">@-10</span>)</span><span class="comment">;</span>
+}]<span class="comment">;</span></span>
+</code></pre><p>它的的作用是为View的上下左右各添加10像素间隔的约束;</p>
+<p>这段代码的内部实现运用了链式编程思想, 其有两个特点:  </p>
+<pre><code><span class="number">1.</span> 链式调用: 通过一长串点语法链接的形式简单明确地实现相应功能;  
+<span class="number">2.</span> 高聚合度: 将对约束的处理统一放在一个block块中, 使同类代码聚合在一起;  
+</code></pre><p>首先分析链式调用是怎么实现的:  </p>
+<pre><code>- (<span class="constant">MASConstraint</span> *)<span class="symbol">constraint:</span>(<span class="constant">MASConstraint</span> *)constraint <span class="symbol">addConstraintWithLayoutAttribute:</span>(<span class="constant">NSLayoutAttribute</span>)layoutAttribute {
+<span class="constant">MASViewAttribute</span> *viewAttribute = [[<span class="constant">MASViewAttribute</span> alloc] <span class="symbol">initWithView:</span><span class="keyword">self</span>.view <span class="symbol">layoutAttribute:</span>layoutAttribute];
+<span class="constant">MASViewConstraint</span> *newConstraint = [[<span class="constant">MASViewConstraint</span> alloc] <span class="symbol">initWithFirstViewAttribute:</span>viewAttribute];
+<span class="keyword">if</span> ([constraint <span class="symbol">isKindOfClass:</span><span class="constant">MASViewConstraint</span>.<span class="keyword">class</span>]) {
+    <span class="regexp">//replace</span> <span class="keyword">with</span> composite constraint
+    <span class="constant">NSArray</span> *children = <span class="annotation">@[constraint, newConstraint]</span>;
+    <span class="constant">MASCompositeConstraint</span> *compositeConstraint = [[<span class="constant">MASCompositeConstraint</span> alloc] <span class="symbol">initWithChildren:</span>children];
+    compositeConstraint.delegate = <span class="keyword">self</span>;
+    [<span class="keyword">self</span> <span class="symbol">constraint:</span>constraint <span class="symbol">shouldBeReplacedWithConstraint:</span>compositeConstraint];
+    <span class="keyword">return</span> compositeConstraint;
+}
+<span class="keyword">if</span> (!constraint) {
+    newConstraint.delegate = <span class="keyword">self</span>;
+    [<span class="keyword">self</span>.constraints <span class="symbol">addObject:</span>newConstraint];
+}
+<span class="keyword">return</span> newConstraint;
+</code></pre><p>}</p>
+<p>在该方法中, make.left 会新建一个 constraint 元素, 并添加到 make 的 constraints 数组中, 接着将该元素的代理设置为 make 本身, 最后返回该 constraint 元素;</p>
+<p>类似地, make.left.top 也会控制其代理(即上一步中的make本身)新建一个 constraint 元素, 并添加到 make 的 constraints 数组中, 接着将其将该元素的代理设置为 make 本身, 最后返回该 constraint 元素, 通过这样的调用循环往复, 实现链式调用的效果;  </p>
+<p>最终 make.left.top.equal(@10) 中的 .equal 方法会返回一个 block , 我们只需要像调用一个普通 block 一样将参数填在其后的括号里就完成了整个方法的调用;  </p>
+<p>这种编程方式的另外一个特点就是代码的高聚合度, 将我们需要做的操作统一塞在block块里, 方便查看和管理;  </p>
+
+    
+  </div>
+  <footer>
+    
+      
+  <div class="categories">
+    <a class="categories-link" href="/categories/iOS开发/">iOS开发</a>
+  </div>
+
+      
+  <div class="tags">
+    <a class="tags-link" href="/tags/ReactiveCocoa/">ReactiveCocoa</a>, <a class="tags-link" href="/tags/iOS/">iOS</a>
+  </div>
+
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+</div>
+  </div>
+  <footer id="footer"><div class="copyright">
+  
+  &copy; 2016 <a href="/">Zfan</a>
+  
+</div>
+<div class="theme-copyright">
+  Theme by <a href="https://github.com/orderedlist" target="_blank">orderedlist</a>
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+<script src="/js/scale.fix.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+  (function($){
+    $('.fancybox').fancybox();
+  })(jQuery);
+</script>
+
+</body>
+</html>
