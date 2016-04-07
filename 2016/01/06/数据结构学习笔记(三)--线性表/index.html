@@ -1,0 +1,231 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  
+  <title>数据结构学习笔记(三)--线性表 | 永远站在鸡蛋一边</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  
+    <meta name="author" content="Zfan">
+  
+  
+    <meta name="description" content="线性表的概念线性表简称表, 是零个或多个元素的有穷序列.
+线性结构有一个唯一的开始节点, 其没有前驱, 有一个唯一的直接后继;有一个唯一的终止节点, 其没有后继, 有一个唯一的直接前驱;其他的节点称为内部节点, 每一个内部节点有且仅有一个唯一的直接前驱和一个唯一的直接后继;具有反对称性和传递性;  
+线性结构的特点
+
+均匀性:同一线性表的各数据元素必定具有相同的数据类型和长度;
+有序性:数据元素之">
+  
+  <meta name="description" content="线性表的概念线性表简称表, 是零个或多个元素的有穷序列.
+线性结构有一个唯一的开始节点, 其没有前驱, 有一个唯一的直接后继;有一个唯一的终止节点, 其没有后继, 有一个唯一的直接前驱;其他的节点称为内部节点, 每一个内部节点有且仅有一个唯一的直接前驱和一个唯一的直接后继;具有反对称性和传递性;  
+线性结构的特点
+
+均匀性:同一线性表的各数据元素必定具有相同的数据类型和长度;
+有序性:数据元素之">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构学习笔记(三)--线性表">
+<meta property="og:url" content="http://zvan.xyz/2016/01/06/数据结构学习笔记(三)--线性表/index.html">
+<meta property="og:site_name" content="永远站在鸡蛋一边">
+<meta property="og:description" content="线性表的概念线性表简称表, 是零个或多个元素的有穷序列.
+线性结构有一个唯一的开始节点, 其没有前驱, 有一个唯一的直接后继;有一个唯一的终止节点, 其没有后继, 有一个唯一的直接前驱;其他的节点称为内部节点, 每一个内部节点有且仅有一个唯一的直接前驱和一个唯一的直接后继;具有反对称性和传递性;  
+线性结构的特点
+
+均匀性:同一线性表的各数据元素必定具有相同的数据类型和长度;
+有序性:数据元素之">
+<meta property="og:updated_time" content="2016-01-08T07:42:50.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据结构学习笔记(三)--线性表">
+<meta name="twitter:description" content="线性表的概念线性表简称表, 是零个或多个元素的有穷序列.
+线性结构有一个唯一的开始节点, 其没有前驱, 有一个唯一的直接后继;有一个唯一的终止节点, 其没有后继, 有一个唯一的直接前驱;其他的节点称为内部节点, 每一个内部节点有且仅有一个唯一的直接前驱和一个唯一的直接后继;具有反对称性和传递性;  
+线性结构的特点
+
+均匀性:同一线性表的各数据元素必定具有相同的数据类型和长度;
+有序性:数据元素之">
+  
+  
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+
+<body>
+  <div class="wrapper">
+    <header id="header">
+  <div class="title">
+    <h1><a href="/">永远站在鸡蛋一边</a></h1>
+    <p><a href="/">--Zfan的记事簿--</a></p>
+  </div>
+  <nav class="nav">
+    <ul>
+      
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+  <div class="clearfix"></div>
+</header>
+    <div class="content"><article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2016/01/06/数据结构学习笔记(三)--线性表/">
+  <time datetime="2016-01-06T14:41:36.000Z">
+    2016-01-06
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title">数据结构学习笔记(三)--线性表</h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <h3 id="线性表的概念">线性表的概念</h3><p>线性表简称表, 是零个或多个元素的有穷序列.</p>
+<h3 id="线性结构">线性结构</h3><p>有一个唯一的开始节点, 其没有前驱, 有一个唯一的直接后继;<br>有一个唯一的终止节点, 其没有后继, 有一个唯一的直接前驱;<br>其他的节点称为内部节点, 每一个内部节点有且仅有一个唯一的直接前驱和一个唯一的直接后继;<br>具有反对称性和传递性;  </p>
+<h3 id="线性结构的特点">线性结构的特点</h3><blockquote>
+<ul>
+<li>均匀性:同一线性表的各数据元素必定具有相同的数据类型和长度;</li>
+<li>有序性:数据元素之间的相对位置是线性的;</li>
+</ul>
+</blockquote>
+<h3 id="线性结构的分类">线性结构的分类</h3><p>按照复杂程度划分:</p>
+<blockquote>
+<ul>
+<li>简单的:线性表,栈,队列,散列表等等;</li>
+<li>复杂的:广义表,多维数组,文件等等;</li>
+</ul>
+</blockquote>
+<p>按照访问方式划分:</p>
+<blockquote>
+<ul>
+<li>直接访问型</li>
+<li>顺序访问型</li>
+<li>目录索引型</li>
+</ul>
+</blockquote>
+<p>按照操作划分:  </p>
+<blockquote>
+<ul>
+<li>线性表:不限制操作形式,分为顺序表或链表;  </li>
+<li>栈:插入和删除都限制在一端进行;  </li>
+<li>队列:插入操作在表的一端,删除操作在表的另一端;  </li>
+</ul>
+</blockquote>
+<h3 id="线性表的存储结构">线性表的存储结构</h3><p>1.顺序表</p>
+<p>按照索引值从小到大存放在一片相邻的区域内;紧凑结构,存储密度为1;</p>
+<p>2.链表</p>
+<blockquote>
+<ul>
+<li>单链表  </li>
+<li>双链表  </li>
+<li>循环链表</li>
+</ul>
+</blockquote>
+<h3 id="顺序表">顺序表</h3><p>顺序表也称<code>向量</code>,采用定长的一维数组存储结构;</p>
+<p>顺序表的主要特性:</p>
+<blockquote>
+<p>元素的类型相同<br>元素<code>顺序</code>地存储在连续的存储空间中,每一个元素有相同的索引值;<br>使用常数作为向量长度  </p>
+</blockquote>
+<p>顺序表的插入和删除时间代价相同,均为O(n);</p>
+<h3 id="链表">链表</h3><p>链表通过<code>指针</code>把它的一串存储节点链接成一个链;</p>
+<p>存储节点由两部分组成:  </p>
+<blockquote>
+<p>数据域 + 指针域(后继地址)  </p>
+</blockquote>
+<p>链表的分类:</p>
+<blockquote>
+<ul>
+<li>单链表  </li>
+<li>双链表  </li>
+<li>循环链表  </li>
+</ul>
+</blockquote>
+<h3 id="单链表">单链表</h3><p>带头结点的单链表: </p>
+<blockquote>
+<p>整个单链表具有一个头结点: head;<br>第一个结点: head -&gt; next, head != NULL;<br>空表判断: head -&gt; next == NULL;<br>当前结点(一般由其前驱表示): fence -&gt; next;  </p>
+</blockquote>
+<p>单链表的运算:</p>
+<blockquote>
+<p>对于任何一个结点操作, 必须先找到它;<br>寻找单链表中的任何一个节点, 必须从第一个结点开始;  </p>
+</blockquote>
+<p>单链表的时间复杂度: O(n);  </p>
+<h3 id="双链表">双链表</h3><p>为了弥补单链表的不足, 产生了双链表;  </p>
+<blockquote>
+<p>单链表的 next 字段只能仅仅指向后继结点, 不能有效找到前驱;<br>双链表增加了一个指向前驱的指针;  </p>
+</blockquote>
+<h3 id="循环链表">循环链表</h3><p>将单链表或者双链表的头尾结点连接起来, 就是一个循环链表;<br>不增加额外存储花销, 却给不少操作带来了方便; 从循环链表的任何一个结点出发, 都能访问到表中的其他节点;  </p>
+<h3 id="链表的边界条件">链表的边界条件</h3><ol>
+<li>几个特殊点的处理  </li>
+</ol>
+<blockquote>
+<ul>
+<li>头指针处理  </li>
+<li>非循环链表表尾结点的指针域保持为NULL;  </li>
+<li>循环链表表尾结点的指针指回头结点;  </li>
+</ul>
+</blockquote>
+<ol>
+<li>链表处理  </li>
+</ol>
+<blockquote>
+<ul>
+<li>空链表的特殊处理  </li>
+<li>插入或删除结点时指针勾链的顺序;  </li>
+<li>指针移动的正确性;  </li>
+</ul>
+</blockquote>
+
+    
+  </div>
+  <footer>
+    
+      
+  <div class="categories">
+    <a class="categories-link" href="/categories/数据结构/">数据结构</a>
+  </div>
+
+      
+  <div class="tags">
+    <a class="tags-link" href="/tags/数据结构/">数据结构</a>, <a class="tags-link" href="/tags/线性表/">线性表</a>
+  </div>
+
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+</div>
+  </div>
+  <footer id="footer"><div class="copyright">
+  
+  &copy; 2016 <a href="/">Zfan</a>
+  
+</div>
+<div class="theme-copyright">
+  Theme by <a href="https://github.com/orderedlist" target="_blank">orderedlist</a>
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+<script src="/js/scale.fix.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+  (function($){
+    $('.fancybox').fancybox();
+  })(jQuery);
+</script>
+
+</body>
+</html>

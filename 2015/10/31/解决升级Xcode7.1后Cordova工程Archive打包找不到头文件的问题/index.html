@@ -1,0 +1,128 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  
+  <title>解决升级Xcode7.1后，Cordova工程Archive打包找不到头文件的问题 | 永远站在鸡蛋一边</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  
+    <meta name="author" content="Zfan">
+  
+  
+    <meta name="description" content="在Build Settings-&amp;gt;Search Paths-&amp;gt;Header Search Paths-&amp;gt;Release下添加如下路径：
+“$(OBJROOT)/UninstalledProducts/$(PLATFORM_NAME)/include”
+原文地址：http://forum.ionicframework.com/t/cordova-cdvviewcontroller-">
+  
+  <meta name="description" content="在Build Settings-&amp;gt;Search Paths-&amp;gt;Header Search Paths-&amp;gt;Release下添加如下路径：
+“$(OBJROOT)/UninstalledProducts/$(PLATFORM_NAME)/include”
+原文地址：http://forum.ionicframework.com/t/cordova-cdvviewcontroller-">
+<meta property="og:type" content="article">
+<meta property="og:title" content="解决升级Xcode7.1后，Cordova工程Archive打包找不到头文件的问题">
+<meta property="og:url" content="http://zvan.xyz/2015/10/31/解决升级Xcode7.1后Cordova工程Archive打包找不到头文件的问题/index.html">
+<meta property="og:site_name" content="永远站在鸡蛋一边">
+<meta property="og:description" content="在Build Settings-&amp;gt;Search Paths-&amp;gt;Header Search Paths-&amp;gt;Release下添加如下路径：
+“$(OBJROOT)/UninstalledProducts/$(PLATFORM_NAME)/include”
+原文地址：http://forum.ionicframework.com/t/cordova-cdvviewcontroller-">
+<meta property="og:updated_time" content="2015-11-20T15:48:43.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="解决升级Xcode7.1后，Cordova工程Archive打包找不到头文件的问题">
+<meta name="twitter:description" content="在Build Settings-&amp;gt;Search Paths-&amp;gt;Header Search Paths-&amp;gt;Release下添加如下路径：
+“$(OBJROOT)/UninstalledProducts/$(PLATFORM_NAME)/include”
+原文地址：http://forum.ionicframework.com/t/cordova-cdvviewcontroller-">
+  
+  
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+
+<body>
+  <div class="wrapper">
+    <header id="header">
+  <div class="title">
+    <h1><a href="/">永远站在鸡蛋一边</a></h1>
+    <p><a href="/">--Zfan的记事簿--</a></p>
+  </div>
+  <nav class="nav">
+    <ul>
+      
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+  <div class="clearfix"></div>
+</header>
+    <div class="content"><article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2015/10/31/解决升级Xcode7.1后Cordova工程Archive打包找不到头文件的问题/">
+  <time datetime="2015-10-30T18:28:29.000Z">
+    2015-10-31
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title">解决升级Xcode7.1后，Cordova工程Archive打包找不到头文件的问题</h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <p>在Build Settings-&gt;Search Paths-&gt;Header Search Paths-&gt;Release下添加如下路径：</p>
+<pre><code>“<span class="variable">$(</span><span class="constant">OBJROOT</span>)/<span class="constant">UninstalledProducts</span>/<span class="variable">$(</span><span class="constant">PLATFORM_NAME</span>)/<span class="keyword">include</span>”
+</code></pre><p>原文地址：<a href="http://forum.ionicframework.com/t/cordova-cdvviewcontroller-h-file-not-found-in-xcode-7-1-beta/32232" target="_blank" rel="external">http://forum.ionicframework.com/t/cordova-cdvviewcontroller-h-file-not-found-in-xcode-7-1-beta/32232</a></p>
+
+    
+  </div>
+  <footer>
+    
+      
+  <div class="categories">
+    <a class="categories-link" href="/categories/iOS开发/">iOS开发</a>
+  </div>
+
+      
+  <div class="tags">
+    <a class="tags-link" href="/tags/Cordova/">Cordova</a>, <a class="tags-link" href="/tags/PhoneGap/">PhoneGap</a>, <a class="tags-link" href="/tags/Xcode/">Xcode</a>, <a class="tags-link" href="/tags/iOS开发/">iOS开发</a>
+  </div>
+
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+</div>
+  </div>
+  <footer id="footer"><div class="copyright">
+  
+  &copy; 2016 <a href="/">Zfan</a>
+  
+</div>
+<div class="theme-copyright">
+  Theme by <a href="https://github.com/orderedlist" target="_blank">orderedlist</a>
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+<script src="/js/scale.fix.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+  (function($){
+    $('.fancybox').fancybox();
+  })(jQuery);
+</script>
+
+</body>
+</html>
