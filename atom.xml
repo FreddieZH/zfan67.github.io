@@ -72,7 +72,7 @@ dispatch_retain()&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
     <link href="http://zvan.xyz/2016/07/03/%E8%87%AA%E5%8A%A8%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0%20(Auto%20Reference%20Counting)/"/>
     <id>http://zvan.xyz/2016/07/03/自动引用计数 (Auto Reference Counting)/</id>
     <published>2016-07-03T04:18:00.000Z</published>
-    <updated>2016-07-25T08:00:11.000Z</updated>
+    <updated>2016-07-25T08:58:53.000Z</updated>
     
     <content type="html">&lt;h4 id=&quot;自动引用计数_(Auto_Reference_Counting)&quot;&gt;自动引用计数 (Auto Reference Counting)&lt;/h4&gt;&lt;p&gt;在LLVM编译器中设置ARC为有效状态, 就无需再次输入retain或者release代码.&lt;/p&gt;
 &lt;h4 id=&quot;引用计数的思考方式:_&quot;&gt;引用计数的思考方式: &lt;/h4&gt;&lt;p&gt;自己生成的对象, 自己持有;&lt;br&gt;非自己生成的对象, 自己也能持有;&lt;br&gt;不再需要自己持有的对象, 可以释放;&lt;br&gt;非自己持有的对象, 自己不能释放.&lt;/p&gt;
@@ -82,8 +82,11 @@ dispatch_retain()&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
 &lt;h4 id=&quot;AutoRelease的内部实现&quot;&gt;AutoRelease的内部实现&lt;/h4&gt;&lt;p&gt;通过将 autoRelease 的对象加入内部数组, 在 AutoReleasePool 生命周期结束的时候统一调用内部数组中对象的 release 方法实现的;&lt;/p&gt;
 &lt;h4 id=&quot;ARC_规则&quot;&gt;ARC 规则&lt;/h4&gt;&lt;p&gt;一个应用程序中可以混合 ARC 和 MRC;&lt;/p&gt;
 &lt;p&gt;对象类型必须附加所有权修饰符 (没有明确指定所有权修饰符时, 默认为__strong);  &lt;/p&gt;
-&lt;p&gt;四种所有权修饰符:  &lt;code&gt;__strong``__weak``__unsafe__unretained``__autoreleasing&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;__strong``__weak``__autoreleasing&lt;/code&gt;可以保证将有这些修饰符的自动变量初始化为nil;&lt;/p&gt;
+&lt;p&gt;四种所有权修饰符:  &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;__strong&lt;/code&gt;, &lt;code&gt;__weak&lt;/code&gt;, &lt;code&gt;__unsafe__unretained&lt;/code&gt;, &lt;code&gt;__autoreleasing&lt;/code&gt;  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;code&gt;__strong&lt;/code&gt;, &lt;code&gt;__weak&lt;/code&gt;, &lt;code&gt;__autoreleasing&lt;/code&gt; 可以保证将有这些修饰符的自动变量初始化为nil;&lt;/p&gt;
 &lt;p&gt;循环引用既可以是交叉引用, 也可能是对自身的强引用; 使用__weak修饰符可以避免循环引用;&lt;/p&gt;
 &lt;p&gt;__weak修饰符修饰的对象若被废弃, 则该弱引用将被自动置为nil; 而&lt;code&gt;__unsafe__unretained&lt;/code&gt;修饰符则无此特性;&lt;/p&gt;
 &lt;p&gt;__weak修饰符只能应用于 iOS5 以上版本;&lt;/p&gt;
