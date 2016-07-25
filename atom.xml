@@ -72,7 +72,7 @@ dispatch_retain()&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
     <link href="http://zvan.xyz/2016/07/03/%E8%87%AA%E5%8A%A8%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0%20(Auto%20Reference%20Counting)/"/>
     <id>http://zvan.xyz/2016/07/03/自动引用计数 (Auto Reference Counting)/</id>
     <published>2016-07-03T04:18:00.000Z</published>
-    <updated>2016-07-25T08:58:53.000Z</updated>
+    <updated>2016-07-25T08:59:58.000Z</updated>
     
     <content type="html">&lt;h4 id=&quot;自动引用计数_(Auto_Reference_Counting)&quot;&gt;自动引用计数 (Auto Reference Counting)&lt;/h4&gt;&lt;p&gt;在LLVM编译器中设置ARC为有效状态, 就无需再次输入retain或者release代码.&lt;/p&gt;
 &lt;h4 id=&quot;引用计数的思考方式:_&quot;&gt;引用计数的思考方式: &lt;/h4&gt;&lt;p&gt;自己生成的对象, 自己持有;&lt;br&gt;非自己生成的对象, 自己也能持有;&lt;br&gt;不再需要自己持有的对象, 可以释放;&lt;br&gt;非自己持有的对象, 自己不能释放.&lt;/p&gt;
