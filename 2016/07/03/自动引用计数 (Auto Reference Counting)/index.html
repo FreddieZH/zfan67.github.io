@@ -1,0 +1,141 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  
+  <title>ARC学习笔记 | 永远站在鸡蛋一边</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  
+    <meta name="author" content="Zfan">
+  
+  
+    <meta name="description" content="自动引用计数 (Auto Reference Counting)在LLVM编译器中设置ARC为有效状态, 就无需再次输入retain或者release代码.
+引用计数的思考方式: 自己生成的对象, 自己持有;非自己生成的对象, 自己也能持有;不再需要自己持有的对象, 可以释放;非自己持有的对象, 自己不能释放.
+对象操作与 OC 方法对应生成并持有对象    alloc new copy mu">
+  
+  <meta name="description" content="自动引用计数 (Auto Reference Counting)在LLVM编译器中设置ARC为有效状态, 就无需再次输入retain或者release代码.
+引用计数的思考方式: 自己生成的对象, 自己持有;非自己生成的对象, 自己也能持有;不再需要自己持有的对象, 可以释放;非自己持有的对象, 自己不能释放.
+对象操作与 OC 方法对应生成并持有对象    alloc new copy mu">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ARC学习笔记">
+<meta property="og:url" content="http://zvan.xyz/2016/07/03/自动引用计数 (Auto Reference Counting)/index.html">
+<meta property="og:site_name" content="永远站在鸡蛋一边">
+<meta property="og:description" content="自动引用计数 (Auto Reference Counting)在LLVM编译器中设置ARC为有效状态, 就无需再次输入retain或者release代码.
+引用计数的思考方式: 自己生成的对象, 自己持有;非自己生成的对象, 自己也能持有;不再需要自己持有的对象, 可以释放;非自己持有的对象, 自己不能释放.
+对象操作与 OC 方法对应生成并持有对象    alloc new copy mu">
+<meta property="og:updated_time" content="2016-07-04T11:09:41.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ARC学习笔记">
+<meta name="twitter:description" content="自动引用计数 (Auto Reference Counting)在LLVM编译器中设置ARC为有效状态, 就无需再次输入retain或者release代码.
+引用计数的思考方式: 自己生成的对象, 自己持有;非自己生成的对象, 自己也能持有;不再需要自己持有的对象, 可以释放;非自己持有的对象, 自己不能释放.
+对象操作与 OC 方法对应生成并持有对象    alloc new copy mu">
+  
+  
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+
+<body>
+  <div class="wrapper">
+    <header id="header">
+  <div class="title">
+    <h1><a href="/">永远站在鸡蛋一边</a></h1>
+    <p><a href="/">--Zfan的记事簿--</a></p>
+  </div>
+  <nav class="nav">
+    <ul>
+      
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+  <div class="clearfix"></div>
+</header>
+    <div class="content"><article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2016/07/03/自动引用计数 (Auto Reference Counting)/">
+  <time datetime="2016-07-03T04:18:00.000Z">
+    2016-07-03
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title">ARC学习笔记</h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <h4 id="自动引用计数_(Auto_Reference_Counting)">自动引用计数 (Auto Reference Counting)</h4><p>在LLVM编译器中设置ARC为有效状态, 就无需再次输入retain或者release代码.</p>
+<h4 id="引用计数的思考方式:_">引用计数的思考方式: </h4><p>自己生成的对象, 自己持有;<br>非自己生成的对象, 自己也能持有;<br>不再需要自己持有的对象, 可以释放;<br>非自己持有的对象, 自己不能释放.</p>
+<h4 id="对象操作与_OC_方法对应">对象操作与 OC 方法对应</h4><p>生成并持有对象    <code>alloc</code> <code>new</code> <code>copy</code> <code>mutableCopy</code> (自己生成的对象, 自己持有)<br>持有对象    <code>retain</code> (非自己生成的对象, 自己也能持有)<br>释放对象    <code>release</code>  (不需要自己持有的对象, 可以释放)<br>废弃对象    <code>dealloc</code>   ()</p>
+<h4 id="alloc方法的内部实现">alloc方法的内部实现</h4><p>通过 allocWithZone: 类方法调用 NSAllocateObject 函数分配对象; NSAllocateObject函数通过调用NSZoneMalloc函数来分配存放对象所需的内存空间, 之后将此内存空间置为0, 最后返回对象的指针;</p>
+<p>引用计数的保存: 苹果的实现是通过散列表来保存引用计数;</p>
+<h4 id="AutoRelease的内部实现">AutoRelease的内部实现</h4><p>通过将 autoRelease 的对象加入内部数组, 在 AutoReleasePool 生命周期结束的时候统一调用内部数组中对象的 release 方法实现的;</p>
+<h4 id="ARC_规则">ARC 规则</h4><p>一个应用程序中可以混合 ARC 和 MRC;</p>
+<p>对象类型必须附加所有权修饰符 (没有明确指定所有权修饰符时, 默认为__strong);  </p>
+<p>四种所有权修饰符: <code>__strong``__weak``__unsafe__unretained``__autoreleasing</code></p>
+<p><code>__strong``__weak``__autoreleasing</code>可以保证将有这些修饰符的自动变量初始化为nil;</p>
+<p>循环引用既可以是交叉引用, 也可能是对自身的强引用; 使用__weak修饰符可以避免循环引用;</p>
+<p><strong>weak修饰符修饰的对象若被废弃, 则该弱引用将被自动置为nil;而`</strong>unsafe__unretained`修饰符则无此特性;</p>
+<p>__weak修饰符只能应用于 iOS5 以上版本;</p>
+<p>ARC 环境下通过 __autoreleasing 修饰符来代替 autorelease 方法; 通过 <code>@autorelease {}</code> 来代替 NSAutoReleasePool 类;</p>
+<p>在 AutoReleasePool 中生成的对象, 编译器会自动检查方法名是否以 alloc/new/copy/mutableCopy 开始, 如果不是则自动将返回的对象注册到 autoreleasepool;  </p>
+<p>对象的指针在没有显式指定时会被附上 __autoreleasing 修饰符;</p>
+
+    
+  </div>
+  <footer>
+    
+      
+  <div class="categories">
+    <a class="categories-link" href="/categories/iOS开发/">iOS开发</a>
+  </div>
+
+      
+  <div class="tags">
+    <a class="tags-link" href="/tags/ARC/">ARC</a>, <a class="tags-link" href="/tags/iOS/">iOS</a>
+  </div>
+
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+</div>
+  </div>
+  <footer id="footer"><div class="copyright">
+  
+  &copy; 2016 <a href="/">Zfan</a>
+  
+</div>
+<div class="theme-copyright">
+  Theme by <a href="https://github.com/orderedlist" target="_blank">orderedlist</a>
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+<script src="/js/scale.fix.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+  (function($){
+    $('.fancybox').fancybox();
+  })(jQuery);
+</script>
+
+</body>
+</html>

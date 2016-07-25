@@ -1,0 +1,166 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  
+  <title>GCD 学习笔记 | 永远站在鸡蛋一边</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  
+    <meta name="author" content="Zfan">
+  
+  
+    <meta name="description" content="开发者所要做的是将想要执行的任务添加到适当的 Dispatch Queue 当中;  
+Dispatch Queue 的种类
+Serial Dispatch Queue
+Concurrent Dispatch Queue
+
+Serial Dispatch QueueSerial Dispatch Queue 中的任务顺序执行, 同时执行的任务数只能为1;  
+Concurrent Dispatch">
+  
+  <meta name="description" content="开发者所要做的是将想要执行的任务添加到适当的 Dispatch Queue 当中;  
+Dispatch Queue 的种类
+Serial Dispatch Queue
+Concurrent Dispatch Queue
+
+Serial Dispatch QueueSerial Dispatch Queue 中的任务顺序执行, 同时执行的任务数只能为1;  
+Concurrent Dispatch">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GCD 学习笔记">
+<meta property="og:url" content="http://zvan.xyz/2016/07/24/GCD 学习笔记/index.html">
+<meta property="og:site_name" content="永远站在鸡蛋一边">
+<meta property="og:description" content="开发者所要做的是将想要执行的任务添加到适当的 Dispatch Queue 当中;  
+Dispatch Queue 的种类
+Serial Dispatch Queue
+Concurrent Dispatch Queue
+
+Serial Dispatch QueueSerial Dispatch Queue 中的任务顺序执行, 同时执行的任务数只能为1;  
+Concurrent Dispatch">
+<meta property="og:updated_time" content="2016-07-25T07:55:50.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="GCD 学习笔记">
+<meta name="twitter:description" content="开发者所要做的是将想要执行的任务添加到适当的 Dispatch Queue 当中;  
+Dispatch Queue 的种类
+Serial Dispatch Queue
+Concurrent Dispatch Queue
+
+Serial Dispatch QueueSerial Dispatch Queue 中的任务顺序执行, 同时执行的任务数只能为1;  
+Concurrent Dispatch">
+  
+  
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+
+<body>
+  <div class="wrapper">
+    <header id="header">
+  <div class="title">
+    <h1><a href="/">永远站在鸡蛋一边</a></h1>
+    <p><a href="/">--Zfan的记事簿--</a></p>
+  </div>
+  <nav class="nav">
+    <ul>
+      
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+  <div class="clearfix"></div>
+</header>
+    <div class="content"><article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2016/07/24/GCD 学习笔记/">
+  <time datetime="2016-07-24T08:51:00.000Z">
+    2016-07-24
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title">GCD 学习笔记</h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <p>开发者所要做的是将想要执行的任务添加到适当的 Dispatch Queue 当中;  </p>
+<h4 id="Dispatch_Queue_的种类">Dispatch Queue 的种类</h4><ul>
+<li>Serial Dispatch Queue</li>
+<li>Concurrent Dispatch Queue</li>
+</ul>
+<h4 id="Serial_Dispatch_Queue">Serial Dispatch Queue</h4><p>Serial Dispatch Queue 中的任务顺序执行, 同时执行的任务数只能为1;  </p>
+<h4 id="Concurrent_Dispatch_Queue">Concurrent Dispatch Queue</h4><p>Concurrent Dispatch Queue 中的任务可并行处理, 但是并行处理的数量(线程数)取决于当前系统的状态(XNU内核决定了应当使用的线程数);  </p>
+<h4 id="dispatch_queue_create">dispatch_queue_create</h4><p>通过该函数可以生成 Dispatch Queue:  </p>
+<pre><code>生成 Serial Dispatch Queue<span class="value">:  
+<span class="function">dispatch_queue_create</span>(<span class="string">"com.example.queue"</span>, NULL);</span>  
+
+生成 Concurrent Dispatch Queue<span class="value">: 
+<span class="function">dispatch_queue_create</span>(<span class="string">"com.example.queue"</span>, DISPATCH_QUEUE_CONCURRENT);</span>
+</code></pre><p>一旦生成一个 Serial Dispatch Queue, 系统就为该 Queue 生成一个线程供其使用; 如果生成过多 Serial Dispatch Queue, 则会产生大量线程, 大幅降低系统的响应性能;  </p>
+<p>对于 Concurrent Dispatch Queue, XNU内核会自动管理所需要的线程数量, 因此不会发生线程生成过多的问题;  </p>
+<p>Queue 的命名推荐使用逆序全程域名;  </p>
+<p>生成的 Queue 类型可以用 <code>dispatch_queue_t</code> 类型来表示;  </p>
+<p>Dispatch Queue 的内存管理不能使用 ARC, 需要程序员手动管理, 相关函数:  </p>
+<pre><code>dispatch_release()<span class="comment">;</span>
+dispatch_retain()<span class="comment">;</span>
+</code></pre><p>Dispatch Queue 与其中的 Block 相互持有;  </p>
+<h4 id="Main_Dispatch_Queue_/_Globle_Dispatch_Queue">Main Dispatch Queue / Globle Dispatch Queue</h4><p><code>Main Dispatch Queue</code>: 在主线程中执行的 Dispatch_Queue, 属 Serial Dispatch Queue;  </p>
+<p><code>Globle Dispatch Queue</code>: 所有应用程序都能使用的 Concurrent Dispatch Queue;  </p>
+<p>Globle Dispatch Queue 共有四种优先级: High Priority, Default Priority, Low Priority, Background Priority; 执行优先级只是大致的判断;  </p>
+<h4 id="dispatch_set_target_queue">dispatch_set_target_queue</h4><p>改变生成的 Dispatch Queue 的执行优先级的函数是 dispatch_set_target_queue;  </p>
+
+    
+  </div>
+  <footer>
+    
+      
+  <div class="categories">
+    <a class="categories-link" href="/categories/iOS/">iOS</a>
+  </div>
+
+      
+  <div class="tags">
+    <a class="tags-link" href="/tags/GCD/">GCD</a>, <a class="tags-link" href="/tags/iOS/">iOS</a>
+  </div>
+
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+</div>
+  </div>
+  <footer id="footer"><div class="copyright">
+  
+  &copy; 2016 <a href="/">Zfan</a>
+  
+</div>
+<div class="theme-copyright">
+  Theme by <a href="https://github.com/orderedlist" target="_blank">orderedlist</a>
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+<script src="/js/scale.fix.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+  (function($){
+    $('.fancybox').fancybox();
+  })(jQuery);
+</script>
+
+</body>
+</html>

@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://zvan.xyz/"/>
-  <updated>2016-01-29T08:04:14.000Z</updated>
+  <updated>2016-07-25T07:55:50.000Z</updated>
   <id>http://zvan.xyz/</id>
   
   <author>
@@ -14,6 +14,99 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>GCD 学习笔记</title>
+    <link href="http://zvan.xyz/2016/07/24/GCD%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    <id>http://zvan.xyz/2016/07/24/GCD 学习笔记/</id>
+    <published>2016-07-24T08:51:00.000Z</published>
+    <updated>2016-07-25T07:55:50.000Z</updated>
+    
+    <content type="html">&lt;p&gt;开发者所要做的是将想要执行的任务添加到适当的 Dispatch Queue 当中;  &lt;/p&gt;
+&lt;h4 id=&quot;Dispatch_Queue_的种类&quot;&gt;Dispatch Queue 的种类&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;Serial Dispatch Queue&lt;/li&gt;
+&lt;li&gt;Concurrent Dispatch Queue&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;Serial_Dispatch_Queue&quot;&gt;Serial Dispatch Queue&lt;/h4&gt;&lt;p&gt;Serial Dispatch Queue 中的任务顺序执行, 同时执行的任务数只能为1;  &lt;/p&gt;
+&lt;h4 id=&quot;Concurrent_Dispatch_Queue&quot;&gt;Concurrent Dispatch Queue&lt;/h4&gt;&lt;p&gt;Concurrent Dispatch Queue 中的任务可并行处理, 但是并行处理的数量(线程数)取决于当前系统的状态(XNU内核决定了应当使用的线程数);  &lt;/p&gt;
+&lt;h4 id=&quot;dispatch_queue_create&quot;&gt;dispatch_queue_create&lt;/h4&gt;&lt;p&gt;通过该函数可以生成 Dispatch Queue:  &lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;生成 Serial Dispatch Queue&lt;span class=&quot;value&quot;&gt;:  
+&lt;span class=&quot;function&quot;&gt;dispatch_queue_create&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;&quot;com.example.queue&quot;&lt;/span&gt;, NULL);&lt;/span&gt;  
+
+生成 Concurrent Dispatch Queue&lt;span class=&quot;value&quot;&gt;: 
+&lt;span class=&quot;function&quot;&gt;dispatch_queue_create&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;&quot;com.example.queue&quot;&lt;/span&gt;, DISPATCH_QUEUE_CONCURRENT);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;一旦生成一个 Serial Dispatch Queue, 系统就为该 Queue 生成一个线程供其使用; 如果生成过多 Serial Dispatch Queue, 则会产生大量线程, 大幅降低系统的响应性能;  &lt;/p&gt;
+&lt;p&gt;对于 Concurrent Dispatch Queue, XNU内核会自动管理所需要的线程数量, 因此不会发生线程生成过多的问题;  &lt;/p&gt;
+&lt;p&gt;Queue 的命名推荐使用逆序全程域名;  &lt;/p&gt;
+&lt;p&gt;生成的 Queue 类型可以用 &lt;code&gt;dispatch_queue_t&lt;/code&gt; 类型来表示;  &lt;/p&gt;
+&lt;p&gt;Dispatch Queue 的内存管理不能使用 ARC, 需要程序员手动管理, 相关函数:  &lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;dispatch_release()&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+dispatch_retain()&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Dispatch Queue 与其中的 Block 相互持有;  &lt;/p&gt;
+&lt;h4 id=&quot;Main_Dispatch_Queue_/_Globle_Dispatch_Queue&quot;&gt;Main Dispatch Queue / Globle Dispatch Queue&lt;/h4&gt;&lt;p&gt;&lt;code&gt;Main Dispatch Queue&lt;/code&gt;: 在主线程中执行的 Dispatch_Queue, 属 Serial Dispatch Queue;  &lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Globle Dispatch Queue&lt;/code&gt;: 所有应用程序都能使用的 Concurrent Dispatch Queue;  &lt;/p&gt;
+&lt;p&gt;Globle Dispatch Queue 共有四种优先级: High Priority, Default Priority, Low Priority, Background Priority; 执行优先级只是大致的判断;  &lt;/p&gt;
+&lt;h4 id=&quot;dispatch_set_target_queue&quot;&gt;dispatch_set_target_queue&lt;/h4&gt;&lt;p&gt;改变生成的 Dispatch Queue 的执行优先级的函数是 dispatch_set_target_queue;  &lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;开发者所要做的是将想要执行的任务添加到适当的 Dispatch Queue 当中;  &lt;/p&gt;
+&lt;h4 id=&quot;Dispatch_Queue_的种类&quot;&gt;Dispatch Queue 的种类&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;Serial Dispatch Queue&lt;/li&gt;
+&lt;l
+    
+    </summary>
+    
+      <category term="iOS" scheme="http://zvan.xyz/categories/iOS/"/>
+    
+    
+      <category term="iOS" scheme="http://zvan.xyz/tags/iOS/"/>
+    
+      <category term="GCD" scheme="http://zvan.xyz/tags/GCD/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ARC学习笔记</title>
+    <link href="http://zvan.xyz/2016/07/03/%E8%87%AA%E5%8A%A8%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0%20(Auto%20Reference%20Counting)/"/>
+    <id>http://zvan.xyz/2016/07/03/自动引用计数 (Auto Reference Counting)/</id>
+    <published>2016-07-03T04:18:00.000Z</published>
+    <updated>2016-07-04T11:09:41.000Z</updated>
+    
+    <content type="html">&lt;h4 id=&quot;自动引用计数_(Auto_Reference_Counting)&quot;&gt;自动引用计数 (Auto Reference Counting)&lt;/h4&gt;&lt;p&gt;在LLVM编译器中设置ARC为有效状态, 就无需再次输入retain或者release代码.&lt;/p&gt;
+&lt;h4 id=&quot;引用计数的思考方式:_&quot;&gt;引用计数的思考方式: &lt;/h4&gt;&lt;p&gt;自己生成的对象, 自己持有;&lt;br&gt;非自己生成的对象, 自己也能持有;&lt;br&gt;不再需要自己持有的对象, 可以释放;&lt;br&gt;非自己持有的对象, 自己不能释放.&lt;/p&gt;
+&lt;h4 id=&quot;对象操作与_OC_方法对应&quot;&gt;对象操作与 OC 方法对应&lt;/h4&gt;&lt;p&gt;生成并持有对象    &lt;code&gt;alloc&lt;/code&gt; &lt;code&gt;new&lt;/code&gt; &lt;code&gt;copy&lt;/code&gt; &lt;code&gt;mutableCopy&lt;/code&gt; (自己生成的对象, 自己持有)&lt;br&gt;持有对象    &lt;code&gt;retain&lt;/code&gt; (非自己生成的对象, 自己也能持有)&lt;br&gt;释放对象    &lt;code&gt;release&lt;/code&gt;  (不需要自己持有的对象, 可以释放)&lt;br&gt;废弃对象    &lt;code&gt;dealloc&lt;/code&gt;   ()&lt;/p&gt;
+&lt;h4 id=&quot;alloc方法的内部实现&quot;&gt;alloc方法的内部实现&lt;/h4&gt;&lt;p&gt;通过 allocWithZone: 类方法调用 NSAllocateObject 函数分配对象; NSAllocateObject函数通过调用NSZoneMalloc函数来分配存放对象所需的内存空间, 之后将此内存空间置为0, 最后返回对象的指针;&lt;/p&gt;
+&lt;p&gt;引用计数的保存: 苹果的实现是通过散列表来保存引用计数;&lt;/p&gt;
+&lt;h4 id=&quot;AutoRelease的内部实现&quot;&gt;AutoRelease的内部实现&lt;/h4&gt;&lt;p&gt;通过将 autoRelease 的对象加入内部数组, 在 AutoReleasePool 生命周期结束的时候统一调用内部数组中对象的 release 方法实现的;&lt;/p&gt;
+&lt;h4 id=&quot;ARC_规则&quot;&gt;ARC 规则&lt;/h4&gt;&lt;p&gt;一个应用程序中可以混合 ARC 和 MRC;&lt;/p&gt;
+&lt;p&gt;对象类型必须附加所有权修饰符 (没有明确指定所有权修饰符时, 默认为__strong);  &lt;/p&gt;
+&lt;p&gt;四种所有权修饰符: &lt;code&gt;__strong``__weak``__unsafe__unretained``__autoreleasing&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;__strong``__weak``__autoreleasing&lt;/code&gt;可以保证将有这些修饰符的自动变量初始化为nil;&lt;/p&gt;
+&lt;p&gt;循环引用既可以是交叉引用, 也可能是对自身的强引用; 使用__weak修饰符可以避免循环引用;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;weak修饰符修饰的对象若被废弃, 则该弱引用将被自动置为nil;而`&lt;/strong&gt;unsafe__unretained`修饰符则无此特性;&lt;/p&gt;
+&lt;p&gt;__weak修饰符只能应用于 iOS5 以上版本;&lt;/p&gt;
+&lt;p&gt;ARC 环境下通过 __autoreleasing 修饰符来代替 autorelease 方法; 通过 &lt;code&gt;@autorelease {}&lt;/code&gt; 来代替 NSAutoReleasePool 类;&lt;/p&gt;
+&lt;p&gt;在 AutoReleasePool 中生成的对象, 编译器会自动检查方法名是否以 alloc/new/copy/mutableCopy 开始, 如果不是则自动将返回的对象注册到 autoreleasepool;  &lt;/p&gt;
+&lt;p&gt;对象的指针在没有显式指定时会被附上 __autoreleasing 修饰符;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;自动引用计数_(Auto_Reference_Counting)&quot;&gt;自动引用计数 (Auto Reference Counting)&lt;/h4&gt;&lt;p&gt;在LLVM编译器中设置ARC为有效状态, 就无需再次输入retain或者release代码.&lt;/p&gt;
+&lt;h4 id
+    
+    </summary>
+    
+      <category term="iOS开发" scheme="http://zvan.xyz/categories/iOS%E5%BC%80%E5%8F%91/"/>
+    
+    
+      <category term="iOS" scheme="http://zvan.xyz/tags/iOS/"/>
+    
+      <category term="ARC" scheme="http://zvan.xyz/tags/ARC/"/>
+    
+  </entry>
   
   <entry>
     <title>ReactiveCocoa学习笔记(二)--链式编程</title>
